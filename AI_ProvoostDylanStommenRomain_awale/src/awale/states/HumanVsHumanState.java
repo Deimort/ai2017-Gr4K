@@ -14,6 +14,7 @@ public class HumanVsHumanState extends AwaleStates{
 	private Map<Character,int[]> conversion;
 	private int[] coord;
 
+	MenuGameState ms;
 	public HumanVsHumanState(StateBasedGame sb) {
 		super(1, "HumanVsHuman",sb);
 		conversion = new TreeMap<>();
