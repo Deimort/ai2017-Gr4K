@@ -60,6 +60,15 @@ public class AwaleBoard {
 		return seedCount;
 	}
 	
+	private boolean checkStarvation(int row) {
+		for(int a : board[row]) {
+			if(a != 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	private int[] determineCoordEat(int[] coord) {
 		if(coord[0] == 0 && coord[1] == 5) {
 			coord = new int[] {1,5};
@@ -73,6 +82,10 @@ public class AwaleBoard {
 			}
 		}
 		return coord;
+	}
+	
+	public int getEatenSeeds() {
+		return eatenSeeds;
 	}
 	
 	public AwaleBoard play(int[] coord) {
