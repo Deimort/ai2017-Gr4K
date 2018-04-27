@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class HumanVsHumanState extends AwaleStates{
 	
 	private Map<Character,int[]> conversion;
-	private int[] coord;
+	private int[] coord = new int[2];
 
 	MenuGameState ms;
 	public HumanVsHumanState(StateBasedGame sb) {
@@ -57,6 +57,9 @@ public class HumanVsHumanState extends AwaleStates{
 		}
 		
 		coord = conversion.get(c);
+		if(coord == null) {
+			coord = new int[] {-1,-1};
+		}
 		
 	}
 
