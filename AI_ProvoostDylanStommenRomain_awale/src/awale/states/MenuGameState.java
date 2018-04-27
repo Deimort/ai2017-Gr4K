@@ -22,6 +22,7 @@ public class MenuGameState extends AwaleStates{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawString("MM", gc.getWidth()/2, gc.getHeight()/2);
 		
+		
 	}
 
 	@Override
