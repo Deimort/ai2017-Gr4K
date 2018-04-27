@@ -29,5 +29,10 @@ public class MenuGameState extends AwaleStates{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void keyPressed(int key,char c) {
+		
+	}
 
 }
