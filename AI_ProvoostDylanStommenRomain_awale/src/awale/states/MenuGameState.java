@@ -28,6 +28,7 @@ public class MenuGameState extends AwaleStates{
 		g.drawString("M - Humain VS Machine", 30, 130);
 		g.drawString("Q - Quitter", 30, 160);
 		
+		
 	}
 
 	@Override
