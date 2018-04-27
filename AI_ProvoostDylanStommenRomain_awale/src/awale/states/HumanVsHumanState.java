@@ -21,7 +21,6 @@ public class HumanVsHumanState extends AwaleStates{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		g.drawImage(ms.getImage(), 0, 0);
 		g.drawString("HVH", gc.getWidth()/2, gc.getHeight()/2);
 		
 	}
