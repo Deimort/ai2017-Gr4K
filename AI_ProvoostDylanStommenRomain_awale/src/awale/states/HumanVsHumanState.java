@@ -34,7 +34,7 @@ public class HumanVsHumanState extends AwaleStates{
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		
 	}
 
