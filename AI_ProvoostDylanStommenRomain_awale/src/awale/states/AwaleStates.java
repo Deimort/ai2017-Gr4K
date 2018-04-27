@@ -10,10 +10,12 @@ public class AwaleStates extends BasicGameState {
 	
 	private int id;
 	private String description;
+	protected StateBasedGame sb;
 
-	public AwaleStates(int id, String description) {
+	public AwaleStates(int id, String description,StateBasedGame sb) {
 		this.id = id;
 		this.description = description;
+		this.sb = sb;
 	}
 	
 	@Override

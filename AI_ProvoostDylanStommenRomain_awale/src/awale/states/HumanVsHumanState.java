@@ -2,13 +2,14 @@ package awale.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class HumanVsHumanState extends AwaleStates{
 
-	public HumanVsHumanState() {
-		super(1, "HumanVsHuman");
+	public HumanVsHumanState(StateBasedGame sb) {
+		super(1, "HumanVsHuman",sb);
 	}
 	
 	@Override
@@ -19,7 +20,7 @@ public class HumanVsHumanState extends AwaleStates{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
+		g.drawString("HVH", gc.getWidth()/2, gc.getHeight()/2);
 		
 	}
 
@@ -27,6 +28,13 @@ public class HumanVsHumanState extends AwaleStates{
 	public void update(GameContainer gc, StateBasedGame sbg, int deltaTime) throws SlickException {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void keyPressed(int key,char c) {
+		if(key == Input.KEY_SPACE) {
+			sb.enterState(3);
+		}
 	}
 
 }

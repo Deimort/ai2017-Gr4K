@@ -8,8 +8,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MenuGameState extends AwaleStates{
 
-	public MenuGameState() {
-		super(0, "Menu Principal");
+	public MenuGameState(StateBasedGame sb) {
+		super(0, "Menu Principal",sb);
 	}
 	
 	@Override
@@ -20,7 +20,7 @@ public class MenuGameState extends AwaleStates{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
+		g.drawString("MM", gc.getWidth()/2, gc.getHeight()/2);
 		
 	}
 
@@ -32,7 +32,15 @@ public class MenuGameState extends AwaleStates{
 	
 	@Override
 	public void keyPressed(int key,char c) {
-		
+		if(key == Input.KEY_H) {
+			sb.enterState(1);
+		}
+		else if(key == Input.KEY_M) {
+			sb.enterState(2);
+		}
+		else if(key == Input.KEY_Q) {
+			sb.getContainer().exit();
+		}
 	}
 
 }
