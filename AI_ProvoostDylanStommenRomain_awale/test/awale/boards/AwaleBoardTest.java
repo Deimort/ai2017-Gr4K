@@ -11,6 +11,8 @@ public class AwaleBoardTest {
 	private AwaleBoard ab;
 	private AwaleBoard zero;
 	private AwaleBoard bigNumbers;
+	private AwaleBoard normalSize;
+	private AwaleBoard canNotEatAll;
 	
 	@Before
 	public void determineParamaters() {
@@ -18,6 +20,9 @@ public class AwaleBoardTest {
 		int[][] board = new int[][] {{0,0,0,0,0,0},{0,0,0,0,0,0}};
 		zero = new AwaleBoard(board);
 		bigNumbers = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}});
+		normalSize = new AwaleBoard(new int[][] {{4,0,0,0,0,0}, {1,1,1,1,0,0}});
+		canNotEatAll = new AwaleBoard(new int[][] {{5,0,0,0,0,0}, {1,1,1,1,1,0}});
+		
 	}
 
 	@Test
@@ -66,6 +71,22 @@ public class AwaleBoardTest {
 		int[][] expected = new int[][] {{1,1,1,0,0,1},{1,1,1,1,1,1}};
 		
 		assertArrayEquals(expected,result.board());
+	}
+	
+	@Test
+	public void eatFourSeeds() {
+		AwaleBoard result = normalSize.play(new int[] {0,0});
+		int [][] expected = new int[][] {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
+		
+		assertArrayEquals(expected, result.board());
+	}
+	
+	@Test
+	public void eatsFourSeedsOnFive() {
+		AwaleBoard result = canNotEatAll.play(new int[] {0,0});
+		int [][] expected = new int[][] {{0,0,0,0,0,0}, {2,0,0,0,0,0}};
+		
+		assertArrayEquals(expected, result.board());
 	}
 
 }

@@ -49,11 +49,12 @@ public class AwaleBoard {
 	private int eat(int[] coord) {
 		int seedCount = 0;
 		if(coord[0] >= 0) {
-			System.out.println(coord[0]+" "+coord[1]);
-			while(board[coord[0]][coord[1]] == 2 || board[coord[0]][coord[1]] == 3) {
+			int count = 0;
+			while(count < 4 && (board[coord[0]][coord[1]] == 2 || board[coord[0]][coord[1]] == 3)) {
 				seedCount += board[coord[0]][coord[1]];
 				board[coord[0]][coord[1]] = 0;
 				coord = determineCoordEat(coord);
+				count++;
 			}
 		}
 		return seedCount;
