@@ -60,7 +60,7 @@ public class AwaleBoard {
 		return seedCount;
 	}
 	
-	private boolean checkStarvation(int row) {
+	public boolean checkStarvation(int row) {
 		for(int a : board[row]) {
 			if(a != 0) {
 				return false;

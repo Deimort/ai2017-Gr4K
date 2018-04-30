@@ -17,8 +17,7 @@ public class AwaleBoardTest {
 	@Before
 	public void determineParamaters() {
 		ab = new AwaleBoard();
-		int[][] board = new int[][] {{0,0,0,0,0,0},{0,0,0,0,0,0}};
-		zero = new AwaleBoard(board);
+		zero = new AwaleBoard(new int[][] {{0,0,0,0,0,0},{0,0,0,0,0,0}});
 		bigNumbers = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}});
 		normalSize = new AwaleBoard(new int[][] {{4,0,0,0,0,0}, {1,1,1,1,0,0}});
 		canNotEatAll = new AwaleBoard(new int[][] {{5,0,0,0,0,0}, {1,1,1,1,1,0}});
@@ -87,6 +86,13 @@ public class AwaleBoardTest {
 		int [][] expected = new int[][] {{0,0,0,0,0,0}, {2,0,0,0,0,0}};
 		
 		assertArrayEquals(expected, result.board());
+	}
+	
+	@Test
+	public void testCheckStarvation() {
+		assertTrue(zero.checkStarvation(0));
+		assertTrue(zero.checkStarvation(1));
+		assertFalse(normalSize.checkStarvation(0));
 	}
 
 }
