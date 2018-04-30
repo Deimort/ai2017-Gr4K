@@ -13,6 +13,7 @@ public class AwaleBoardTest {
 	private AwaleBoard bigNumbers;
 	private AwaleBoard normalSize;
 	private AwaleBoard canNotEatAll;
+	private AwaleBoard bigNumbersCopy;
 	
 	@Before
 	public void determineParamaters() {
@@ -21,7 +22,7 @@ public class AwaleBoardTest {
 		bigNumbers = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}});
 		normalSize = new AwaleBoard(new int[][] {{4,0,0,0,0,0}, {1,1,1,1,0,0}});
 		canNotEatAll = new AwaleBoard(new int[][] {{5,0,0,0,0,0}, {1,1,1,1,1,0}});
-		
+		bigNumbersCopy = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}});
 	}
 
 	@Test
@@ -93,6 +94,12 @@ public class AwaleBoardTest {
 		assertTrue(zero.checkStarvation(0));
 		assertTrue(zero.checkStarvation(1));
 		assertFalse(normalSize.checkStarvation(0));
+	}
+	
+	@Test
+	public void hashCodeEqualsOverride() {
+		assertTrue(bigNumbers.equals(bigNumbersCopy));
+		assertEquals(bigNumbers.hashCode(),bigNumbersCopy.hashCode());
 	}
 
 }
