@@ -26,11 +26,13 @@ public class Game {
 	}
 	
 	public void play() {
-		isCycling = previousBoards.contains(currentBoard);
-		previousBoards.add(currentBoard);
-		
+		if(currentBoard.getEatenSeeds() >= 0) {
+			isCycling = previousBoards.contains(currentBoard);
+			previousBoards.add(currentBoard);
+			turn = !turn;
+		}
 		currentBoard = currentBoard.play(currentPlayer.getCurrentCoord());
-		turn = !turn;
+		
 		if(turn) {
 			currentPlayer = players[0];
 		}else {

@@ -86,7 +86,13 @@ public class AwaleBoard {
 	
 	public AwaleBoard play(int[] coord) {
 		AwaleBoard copy = new AwaleBoard(this.board());
-		eatenSeeds = copy.eat(copy.sow(coord));
+		int[] eatCoord = copy.sow(coord);
+		if(eatCoord[0] == coord[0] && eatCoord[1] == coord[1]) {
+			eatenSeeds = -1;
+		}else {
+			eatenSeeds = copy.eat(eatCoord);
+		}
+	
 		
 		return copy;
 	}
