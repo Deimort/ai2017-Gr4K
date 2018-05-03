@@ -4,18 +4,20 @@ import java.util.Arrays;
 
 public class AwaleBoard {
 	
-	private int[][] board;
-	private int eatenSeeds;
+	private final int[][] board;
+	private final int eatenSeeds;
 	
 	public AwaleBoard() {
 		board = new int[2][6];
 		for(int i = 0;i < board.length;i++) {
 			Arrays.fill(board[i],4);
 		}
+		this.eatenSeeds = 0;
 	}
 	
-	public AwaleBoard(int[][] board) {
+	public AwaleBoard(int[][] board,int eatenSeeds) {
 		this.board = board;
+		this.eatenSeeds = eatenSeeds;
 	}
 	
 	private int[] sow(int[] coord) {
@@ -85,16 +87,11 @@ public class AwaleBoard {
 	}
 	
 	public AwaleBoard play(int[] coord) {
-		AwaleBoard copy = new AwaleBoard(this.board());
+		AwaleBoard copy = new AwaleBoard(this.board(),this.getEatenSeeds());
 		int[] eatCoord = copy.sow(coord);
-		if(eatCoord[0] == coord[0] && eatCoord[1] == coord[1]) {
-			eatenSeeds = -1;
-		}else {
-			eatenSeeds = copy.eat(eatCoord);
-		}
 	
 		
-		return copy;
+		return new AwaleBoard(copy.board(),copy.eat(eatCoord));
 	}
 
 	public int[][] board(){

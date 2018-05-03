@@ -15,28 +15,29 @@ public class Game {
 	private boolean turn;
 	
 	public Game() {
-		players = new Player[] {Player.ofId(0),Player.ofId(1)};
+		players = new HumanPlayer[] {HumanPlayer.ofId(0),HumanPlayer.ofId(1)};
 		currentPlayer = players[0];
 		currentBoard = new AwaleBoard();
 		turn = false;
 	}
 	
-	public void giveCoord(int[] coord) {
-		currentPlayer.setCurrentCoord(coord);
+	public boolean giveCoord(int[] coord) {
+		return currentPlayer.setCurrentCoord(coord,currentBoard);
 	}
 	
 	public void play() {
-		if(currentBoard.getEatenSeeds() >= 0) {
-			isCycling = previousBoards.contains(currentBoard);
-			previousBoards.add(currentBoard);
-			turn = !turn;
-		}
+		isCycling = previousBoards.contains(currentBoard);
+		previousBoards.add(currentBoard);
+		
 		currentBoard = currentBoard.play(currentPlayer.getCurrentCoord());
+		currentPlayer.setScore(currentBoard.getEatenSeeds());
 		
 		if(turn) {
 			currentPlayer = players[0];
+			turn = false;
 		}else {
 			currentPlayer = players[1];
+			turn = true;
 		}
 	}
 	

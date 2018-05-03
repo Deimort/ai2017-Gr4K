@@ -70,8 +70,7 @@ public class HumanVsHumanState extends AwaleStates{
 		if(currentGame.isCycling()) {
 			sb.enterState(3);
 		}
-		if(coord[0] >= 0 && coord[0] == currentGame.getCurrentPlayerID()) {
-			currentGame.giveCoord(coord);
+		if(coord[0] >= 0 && currentGame.giveCoord(coord)) {
 			currentGame.play();
 		}
 		

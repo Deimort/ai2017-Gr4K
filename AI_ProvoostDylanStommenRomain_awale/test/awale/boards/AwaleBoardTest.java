@@ -18,11 +18,11 @@ public class AwaleBoardTest {
 	@Before
 	public void determineParamaters() {
 		ab = new AwaleBoard();
-		zero = new AwaleBoard(new int[][] {{0,0,0,0,0,0},{0,0,0,0,0,0}});
-		bigNumbers = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}});
-		normalSize = new AwaleBoard(new int[][] {{4,0,0,0,0,0}, {1,1,1,1,0,0}});
-		canNotEatAll = new AwaleBoard(new int[][] {{5,0,0,0,0,0}, {1,1,1,1,1,0}});
-		bigNumbersCopy = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}});
+		zero = new AwaleBoard(new int[][] {{0,0,0,0,0,0},{0,0,0,0,0,0}},0);
+		bigNumbers = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}},0);
+		normalSize = new AwaleBoard(new int[][] {{4,0,0,0,0,0}, {1,1,1,1,0,0}},0);
+		canNotEatAll = new AwaleBoard(new int[][] {{5,0,0,0,0,0}, {1,1,1,1,1,0}},0);
+		bigNumbersCopy = new AwaleBoard(new int[][]{{0,0,0,0,0,14},{0,0,0,0,0,0}},0);
 	}
 
 	@Test
