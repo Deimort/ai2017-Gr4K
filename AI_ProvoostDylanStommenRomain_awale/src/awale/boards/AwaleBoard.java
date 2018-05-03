@@ -22,11 +22,16 @@ public class AwaleBoard {
 	
 	private int[] sow(int[] coord) {
 		int nbSeed = board[coord[0]][coord[1]];
+		int[] newCoord = coord;
 		board[coord[0]][coord[1]] = 0;
-		for (int i = nbSeed; i > 0; i--) {
-			coord = determineCoordSow(coord);
-			board[coord[0]][coord[1]] += 1;
 
+		for (int i = nbSeed; i > 0; i--) {
+			newCoord = determineCoordSow(newCoord);
+			if(newCoord[0] == coord[0] && newCoord[1] == coord[1]) {
+				board[coord[0]][coord[1]] = 0;
+			}else {
+				board[coord[0]][coord[1]] += 1;
+			}
 		}
 		return coord;
 	}
