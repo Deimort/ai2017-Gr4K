@@ -89,9 +89,10 @@ public class AwaleBoard {
 	public AwaleBoard play(int[] coord) {
 		AwaleBoard copy = new AwaleBoard(this.board(),this.getEatenSeeds());
 		int[] eatCoord = copy.sow(coord);
+		int eatenSeeds = copy.eat(eatCoord);
 	
 		
-		return new AwaleBoard(copy.board(),copy.eat(eatCoord));
+		return new AwaleBoard(copy.board(),eatenSeeds);
 	}
 
 	public int[][] board(){
