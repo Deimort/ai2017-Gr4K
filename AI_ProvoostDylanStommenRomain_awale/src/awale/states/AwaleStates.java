@@ -2,6 +2,7 @@ package awale.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -11,16 +12,21 @@ public class AwaleStates extends BasicGameState {
 	private int id;
 	private String description;
 	protected StateBasedGame sb;
+	private Image background;
 
 	public AwaleStates(int id, String description,StateBasedGame sb) {
 		this.id = id;
 		this.description = description;
 		this.sb = sb;
+		try {
+			this.background = new Image("Images/Savane.jpg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		
 		
 	}
 
@@ -42,6 +48,9 @@ public class AwaleStates extends BasicGameState {
 	
 	public String getDescription() {
 		return description;
+	}
+	public Image getImage() {
+		return background;
 	}
 
 }

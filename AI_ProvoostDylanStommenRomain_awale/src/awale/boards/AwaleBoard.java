@@ -69,9 +69,9 @@ public class AwaleBoard {
 	
 	private int[] determineCoordEat(int[] coord) {
 		if(coord[0] == 0 && coord[1] == 5) {
-			coord = new int[] {1,5};
+			coord = new int[] {0,5};
 		}else if(coord[0] == 1 && coord[1] == 0) {
-			coord = new int[] {0,0};
+			coord = new int[] {1,0};
 		}else {
 			if(coord[0] == 0) {
 				coord[1] += 1;
@@ -89,8 +89,10 @@ public class AwaleBoard {
 	public AwaleBoard play(int[] coord) {
 		AwaleBoard copy = new AwaleBoard(this.board(),this.getEatenSeeds());
 		int[] eatCoord = copy.sow(coord);
-		int eatenSeeds = copy.eat(eatCoord);
-	
+		int eatenSeeds = 0;
+		if(eatCoord[0] != coord[0]) {
+			eatenSeeds = copy.eat(eatCoord);
+		}
 		
 		return new AwaleBoard(copy.board(),eatenSeeds);
 	}

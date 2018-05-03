@@ -9,20 +9,18 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MenuGameState extends AwaleStates{
 
-	private Image background;
+	
 	public MenuGameState(StateBasedGame sb) {
 		super(0, "Menu Principal",sb);
 	}
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		background = new Image("Images/Savane.jpg");
-		
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		g.drawImage(background, 0, 0);
+		g.drawImage(getImage(), 0, 0);
 		g.drawString("Awale", 30, 70);
 		g.drawString("H - Humain VS Humain", 30, 100);
 		g.drawString("M - Humain VS Machine", 30, 130);
@@ -50,8 +48,6 @@ public class MenuGameState extends AwaleStates{
 		}
 	}
 	
-	public Image getImage() {
-		return background;
-	}
+	
 
 }

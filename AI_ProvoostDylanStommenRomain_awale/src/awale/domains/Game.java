@@ -52,6 +52,14 @@ public class Game {
 	public int getCurrentPlayerID() {
 		return currentPlayer.getId();
 	}
-
+	
+	public int[] getScores() {
+		int[] scores = new int[2];
+		for(int i = 0; i < players.length; i++) {
+			scores[i] = players[i].getScore();
+		}
+		
+		return scores;
+	}
 
 }

@@ -20,6 +20,7 @@ public class GameOverState extends AwaleStates{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		g.drawImage(getImage(), 0, 0);
 		g.drawString("GO", gc.getWidth()/2, gc.getHeight()/2);
 		
 	}

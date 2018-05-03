@@ -20,7 +20,7 @@ public class HumanPlayer implements Player {
 	}
 
 	public void setScore(int score) {
-		this.score = score;
+		this.score += score;
 	}
 
 	public int getId() {
