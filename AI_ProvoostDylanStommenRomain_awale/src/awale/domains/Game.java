@@ -61,5 +61,12 @@ public class Game {
 		
 		return scores;
 	}
+	
+	public void end() {
+		for(int i = 0;i < 6;i++) {
+			players[0].setScore(currentBoard.getSeeds(players[0].getId(),i));
+			players[1].setScore(currentBoard.getSeeds(players[0].getId(),i));
+		}
+	}
 
 }

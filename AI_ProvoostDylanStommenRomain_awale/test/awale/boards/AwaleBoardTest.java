@@ -2,6 +2,8 @@ package awale.boards;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -67,8 +69,9 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void sowsCorrectlyWhenNumberOfSeedsExceedsTwelve() {
-		AwaleBoard result = bigNumbers.play(new int[] {0,5});
-		int[][] expected = new int[][] {{1,1,1,0,0,1},{1,1,1,1,1,1}};
+		int[] coord = new int[] {0,5};
+		AwaleBoard result = bigNumbers.play(coord);
+		int[][] expected = new int[][] {{1,1,2,2,2,0},{1,1,1,1,1,1}};
 		
 		assertArrayEquals(expected,result.board());
 	}

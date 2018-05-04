@@ -22,18 +22,18 @@ public class AwaleBoard {
 	
 	private int[] sow(int[] coord) {
 		int nbSeed = board[coord[0]][coord[1]];
-		int[] newCoord = coord;
+		int[] newCoord = Arrays.copyOf(coord, coord.length);
 		board[coord[0]][coord[1]] = 0;
-
-		for (int i = nbSeed; i > 0; i--) {
+		while (nbSeed > 0) {
 			newCoord = determineCoordSow(newCoord);
 			if(newCoord[0] == coord[0] && newCoord[1] == coord[1]) {
-				board[coord[0]][coord[1]] = 0;
+				board[newCoord[0]][newCoord[1]] = 0;
 			}else {
-				board[coord[0]][coord[1]] += 1;
+				board[newCoord[0]][newCoord[1]] += 1;
+				nbSeed--;
 			}
 		}
-		return coord;
+		return newCoord;
 	}
 
 	private int[] determineCoordSow(int[] coord) {
