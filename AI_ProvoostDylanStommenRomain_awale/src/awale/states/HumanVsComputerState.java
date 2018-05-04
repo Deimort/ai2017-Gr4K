@@ -1,17 +1,21 @@
 package awale.states;
 
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class HumanVsComputerState extends AwaleStates{
+	
+	private List<String> winner;
 
-	public HumanVsComputerState(StateBasedGame sb) {
+	public HumanVsComputerState(StateBasedGame sb,List<String> winner) {
 	
 		super(2, "HumanVsComputer",sb);
+		this.winner = winner;
 		
 	}
 	

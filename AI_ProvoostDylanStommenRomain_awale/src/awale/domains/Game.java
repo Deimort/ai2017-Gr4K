@@ -17,7 +17,7 @@ public class Game {
 	public Game() {
 		players = new Player[] {HumanPlayer.ofId(0),HumanPlayer.ofId(1)};
 		currentPlayer = players[0];
-		currentBoard = new AwaleBoard(new int[][] {{0,0,2,0,0,0}, {0,0,0,0,0,0}},0);
+		currentBoard = new AwaleBoard();
 		turn = false;
 	}
 	
@@ -77,9 +77,9 @@ public class Game {
 			players[1].setScore(currentBoard.getSeeds(players[1].getId(),i));
 		}
 		
-		if(players[0].getScore() < players[1].getScore()) {
+		if(players[0].getScore() > players[1].getScore()) {
 			winner = "Joueur 1";
-		}else if(players[0].getScore() > players[1].getScore()) {
+		}else if(players[0].getScore() < players[1].getScore()) {
 			winner = "Joueur 2";
 		}
 		

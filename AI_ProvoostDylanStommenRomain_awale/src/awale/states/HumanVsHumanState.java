@@ -1,7 +1,7 @@
 package awale.states;
 
 import java.awt.Font;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,9 +24,10 @@ public class HumanVsHumanState extends AwaleStates{
 	private int[] scores;
 	private AwaleBoard board;
 	private TrueTypeFont font;
+	private List<String> winner;
 
 	MenuGameState ms;
-	public HumanVsHumanState(StateBasedGame sb) {
+	public HumanVsHumanState(StateBasedGame sb,List<String> winner) {
 		super(1, "HumanVsHuman",sb);
 		conversion = new TreeMap<>();
 		String azerty = "azertyqsdfgh";
@@ -37,6 +38,7 @@ public class HumanVsHumanState extends AwaleStates{
 				compteur++;
 			}
 		}
+		this.winner = winner;
 		
 	}
 	
@@ -44,7 +46,6 @@ public class HumanVsHumanState extends AwaleStates{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.currentGame = new Game();
 		font = new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false);
-		winner = new ArrayList<>();
 	}
 
 	@Override
@@ -89,14 +90,16 @@ public class HumanVsHumanState extends AwaleStates{
 			coord = new Coordinate(-1,-1);
 		}
 		if(currentGame.isCycling()) {
-			currentGame.end();
+			winner.clear();
+			winner.add(currentGame.end());
 			sb.enterState(3);
 		}
 		
 		if(coord.getX() >= 0 && currentGame.giveCoord(coord) == 1) {
 			currentGame.play();
 		}else if(currentGame.giveCoord(coord) == -1) {
-			super.setWinner(currentGame.end());
+			winner.clear();
+			winner.add(currentGame.end());
 			sb.enterState(3);
 		}
 		

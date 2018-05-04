@@ -7,6 +7,9 @@ import awale.states.HumanVsComputerState;
 import awale.states.HumanVsHumanState;
 import awale.states.MenuGameState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -19,10 +22,11 @@ public class AwaleGame extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
+		List<String> winner = new ArrayList<>();
 		addState(new MenuGameState(this));
-		addState(new HumanVsHumanState(this));
-		addState(new HumanVsComputerState(this));
-		addState(new GameOverState(this));
+		addState(new HumanVsHumanState(this,winner));
+		addState(new HumanVsComputerState(this,winner));
+		addState(new GameOverState(this,winner));
 		
 	}
 
