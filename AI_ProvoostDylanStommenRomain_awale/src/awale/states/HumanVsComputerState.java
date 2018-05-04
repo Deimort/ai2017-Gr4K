@@ -2,6 +2,7 @@ package awale.states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -9,7 +10,9 @@ import org.newdawn.slick.state.StateBasedGame;
 public class HumanVsComputerState extends AwaleStates{
 
 	public HumanVsComputerState(StateBasedGame sb) {
+	
 		super(2, "HumanVsComputer",sb);
+		
 	}
 	
 	@Override

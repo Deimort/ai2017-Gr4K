@@ -14,8 +14,8 @@ public interface Player {
 	
 	public int getId();
 	
-	public int[] getCurrentCoord();
+	public Coordinate getCurrentCoord();
 	
-	public boolean setCurrentCoord(int[] currentCoord,AwaleBoard ab);
+	public int setCurrentCoord(Coordinate currentCoord,AwaleBoard ab,boolean starvation);
 
 }

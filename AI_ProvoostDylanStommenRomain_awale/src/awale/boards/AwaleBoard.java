@@ -2,6 +2,8 @@ package awale.boards;
 
 import java.util.Arrays;
 
+import awale.domains.Coordinate;
+
 public class AwaleBoard {
 	
 	private final int[][] board;
@@ -20,43 +22,43 @@ public class AwaleBoard {
 		this.eatenSeeds = eatenSeeds;
 	}
 	
-	private int[] sow(int[] coord) {
-		int nbSeed = board[coord[0]][coord[1]];
-		int[] newCoord = Arrays.copyOf(coord, coord.length);
-		board[coord[0]][coord[1]] = 0;
+	private Coordinate sow(Coordinate coord) {
+		int nbSeed = board[coord.getX()][coord.getY()];
+		Coordinate newCoord = new Coordinate(coord);
+		board[coord.getX()][coord.getY()] = 0;
 		while (nbSeed > 0) {
 			newCoord = determineCoordSow(newCoord);
-			if(newCoord[0] == coord[0] && newCoord[1] == coord[1]) {
-				board[newCoord[0]][newCoord[1]] = 0;
+			if(newCoord.getX() == coord.getX() && newCoord.getY() == coord.getY()) {
+				board[newCoord.getX()][newCoord.getY()] = 0;
 			}else {
-				board[newCoord[0]][newCoord[1]] += 1;
+				board[newCoord.getX()][newCoord.getY()] += 1;
 				nbSeed--;
 			}
 		}
 		return newCoord;
 	}
 
-	private int[] determineCoordSow(int[] coord) {
-		if(coord[0] == 0 && coord[1] == 0) {
-			coord = new int[] {1,0};
-		}else if(coord[0] == 1 && coord[1] == 5) {
-			coord = new int[] {0,5};
+	private Coordinate determineCoordSow(Coordinate coord) {
+		if(coord.getX() == 0 && coord.getY() == 0) {
+			coord = new Coordinate(1,0);
+		}else if(coord.getX() == 1 && coord.getY() == 5) {
+			coord = new Coordinate(0,5);
 		}else {
-			if(coord[0] == 0) {
-				coord[1] -= 1;
+			if(coord.getX() == 0) {
+				coord.setY(-1);
 			}else {
-				coord[1] += 1;
+				coord.setY(1);
 			}
 		}
 		return coord;
 	}
 	
-	private int eat(int[] coord) {
+	private int eat(Coordinate coord) {
 		int seedCount = 0;
 		int count = 0;
-		while (count < 4 && (board[coord[0]][coord[1]] == 2 || board[coord[0]][coord[1]] == 3)) {
-			seedCount += board[coord[0]][coord[1]];
-			board[coord[0]][coord[1]] = 0;
+		while (count < 4 && (board[coord.getX()][coord.getY()] == 2 || board[coord.getX()][coord.getY()] == 3)) {
+			seedCount += board[coord.getX()][coord.getY()];
+			board[coord.getX()][coord.getY()] = 0;
 			coord = determineCoordEat(coord);
 			count++;
 		}
@@ -72,16 +74,16 @@ public class AwaleBoard {
 		return true;
 	}
 	
-	private int[] determineCoordEat(int[] coord) {
-		if(coord[0] == 0 && coord[1] == 5) {
-			coord = new int[] {0,5};
-		}else if(coord[0] == 1 && coord[1] == 0) {
-			coord = new int[] {1,0};
+	private Coordinate determineCoordEat(Coordinate coord) {
+		if(coord.getX() == 0 && coord.getY() == 5) {
+			coord = new Coordinate(0,5);
+		}else if(coord.getX() == 1 && coord.getY() == 0) {
+			coord = new Coordinate(1,0);
 		}else {
-			if(coord[0] == 0) {
-				coord[1] += 1;
+			if(coord.getX() == 0) {
+				coord.setY(1);
 			}else {
-				coord[1] -= 1;
+				coord.setY(-1);
 			}
 		}
 		return coord;
@@ -91,11 +93,11 @@ public class AwaleBoard {
 		return eatenSeeds;
 	}
 	
-	public AwaleBoard play(int[] coord) {
+	public AwaleBoard play(Coordinate coord) {
 		AwaleBoard copy = new AwaleBoard(this.board(),this.getEatenSeeds());
-		int[] eatCoord = copy.sow(coord);
+		Coordinate eatCoord = copy.sow(coord);
 		int eatenSeeds = 0;
-		if(eatCoord[0] != coord[0]) {
+		if(eatCoord.getX() != coord.getX()) {
 			eatenSeeds = copy.eat(eatCoord);
 		}
 		

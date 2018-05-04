@@ -1,5 +1,7 @@
 package awale.states;
 
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -13,6 +15,7 @@ public class AwaleStates extends BasicGameState {
 	private String description;
 	protected StateBasedGame sb;
 	private Image background;
+	protected List<String> winner;
 
 	public AwaleStates(int id, String description,StateBasedGame sb) {
 		this.id = id;
@@ -51,6 +54,18 @@ public class AwaleStates extends BasicGameState {
 	}
 	public Image getImage() {
 		return background;
+	}
+	public void setWinner(String winner) {
+		this.winner.clear();
+		this.winner.add(winner);
+	}
+	
+	public String getWinner() {
+		String winner = "";
+		if(!this.winner.isEmpty()) {
+			winner = this.winner.get(0);
+		}
+		return winner;
 	}
 
 }

@@ -2,12 +2,12 @@ package awale.boards;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import awale.boards.AwaleBoard;
+import awale.domains.Coordinate;
 
 public class AwaleBoardTest {
 	private AwaleBoard ab;
@@ -29,7 +29,7 @@ public class AwaleBoardTest {
 
 	@Test
 	public void sowsCorrectlyForFirstRow() {
-		AwaleBoard result = ab.play(new int[] {0,5});
+		AwaleBoard result = ab.play(new Coordinate(0,5));
 		int[][] expected = new int[][] {{4,5,5,5,5,0},{4,4,4,4,4,4}};
 		
 		assertArrayEquals(expected,result.board());
@@ -37,7 +37,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void sowsCorrectlyForSecondRow() {
-		AwaleBoard result = ab.play(new int[] {1,0});
+		AwaleBoard result = ab.play(new Coordinate(1,0));
 		int[][] expected = new int[][] {{4,4,4,4,4,4},{0,5,5,5,5,4}};
 		
 		assertArrayEquals(expected,result.board());
@@ -45,7 +45,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void sowsCorrectlyWhenAtEndOfFirstRow() {
-		AwaleBoard result = ab.play(new int[] {0,0});
+		AwaleBoard result = ab.play(new Coordinate(0,0));
 		int[][] expected = new int[][] {{0,4,4,4,4,4},{5,5,5,5,4,4}};
 		
 		assertArrayEquals(expected,result.board());
@@ -53,7 +53,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void sowsCorrectlyWhenAtEndOfSecondRow() {
-		AwaleBoard result = ab.play(new int[] {1,5});
+		AwaleBoard result = ab.play(new Coordinate(1,5));
 		int[][] expected = new int[][] {{4,4,5,5,5,5},{4,4,4,4,4,0}};
 		
 		assertArrayEquals(expected,result.board());
@@ -61,7 +61,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void doesntSowWhenCaseIsAtZero() {
-		AwaleBoard result = zero.play(new int[] {1,5});
+		AwaleBoard result = zero.play(new Coordinate(1,5));
 		int[][] expected = new int[][] {{0,0,0,0,0,0},{0,0,0,0,0,0}};
 		
 		assertArrayEquals(expected,result.board());
@@ -69,7 +69,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void sowsCorrectlyWhenNumberOfSeedsExceedsTwelve() {
-		int[] coord = new int[] {0,5};
+		Coordinate coord = new Coordinate(0,5);
 		AwaleBoard result = bigNumbers.play(coord);
 		int[][] expected = new int[][] {{1,1,2,2,2,0},{1,1,1,1,1,1}};
 		
@@ -78,7 +78,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void eatFourSeeds() {
-		AwaleBoard result = normalSize.play(new int[] {0,0});
+		AwaleBoard result = normalSize.play(new Coordinate(0,0));
 		int [][] expected = new int[][] {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
 		
 		assertArrayEquals(expected, result.board());
@@ -86,7 +86,7 @@ public class AwaleBoardTest {
 	
 	@Test
 	public void eatsFourSeedsOnFive() {
-		AwaleBoard result = canNotEatAll.play(new int[] {0,0});
+		AwaleBoard result = canNotEatAll.play(new Coordinate(0,0));
 		int [][] expected = new int[][] {{0,0,0,0,0,0}, {2,0,0,0,0,0}};
 		
 		assertArrayEquals(expected, result.board());

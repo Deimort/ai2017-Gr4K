@@ -15,14 +15,22 @@ public class Game {
 	private boolean turn;
 	
 	public Game() {
-		players = new HumanPlayer[] {HumanPlayer.ofId(0),HumanPlayer.ofId(1)};
+		players = new Player[] {HumanPlayer.ofId(0),HumanPlayer.ofId(1)};
 		currentPlayer = players[0];
-		currentBoard = new AwaleBoard();
+		currentBoard = new AwaleBoard(new int[][] {{0,0,2,0,0,0}, {0,0,0,0,0,0}},0);
 		turn = false;
 	}
 	
-	public boolean giveCoord(int[] coord) {
-		return currentPlayer.setCurrentCoord(coord,currentBoard);
+	public int giveCoord(Coordinate coord) {
+		return currentPlayer.setCurrentCoord(coord,currentBoard,checkStarvation());
+	}
+	
+	private boolean checkStarvation() {
+		if(turn) {
+			return currentBoard.checkStarvation(0);
+		}else {
+			return currentBoard.checkStarvation(1);
+		}
 	}
 	
 	public void play() {
@@ -62,11 +70,20 @@ public class Game {
 		return scores;
 	}
 	
-	public void end() {
+	public String end() {
+		String winner = "Égalité";
 		for(int i = 0;i < 6;i++) {
 			players[0].setScore(currentBoard.getSeeds(players[0].getId(),i));
-			players[1].setScore(currentBoard.getSeeds(players[0].getId(),i));
+			players[1].setScore(currentBoard.getSeeds(players[1].getId(),i));
 		}
+		
+		if(players[0].getScore() < players[1].getScore()) {
+			winner = "Joueur 1";
+		}else if(players[0].getScore() > players[1].getScore()) {
+			winner = "Joueur 2";
+		}
+		
+		return winner;
 	}
 
 }

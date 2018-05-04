@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class GameOverState extends AwaleStates{
+	private String winner;
 
 	public GameOverState(StateBasedGame sb) {
 		super(3, "GameOver",sb);
@@ -21,13 +22,13 @@ public class GameOverState extends AwaleStates{
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawImage(getImage(), 0, 0);
-		g.drawString("GO", gc.getWidth()/2, gc.getHeight()/2);
+		g.drawString("Gagnant : "+ winner , gc.getWidth()/2, gc.getHeight()/2);
 		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int deltaTime) throws SlickException {
-		// TODO Auto-generated method stub
+		winner = super.getWinner();
 		
 	}
 	@Override

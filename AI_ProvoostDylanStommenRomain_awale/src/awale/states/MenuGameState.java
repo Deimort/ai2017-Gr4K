@@ -38,6 +38,11 @@ public class MenuGameState extends AwaleStates{
 	@Override
 	public void keyPressed(int key,char c) {
 		if(key == Input.KEY_H) {
+			try {
+				sb.getState(1).init(sb.getContainer(),sb);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
 			sb.enterState(1);
 		}
 		else if(key == Input.KEY_M) {

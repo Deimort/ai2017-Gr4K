@@ -1,6 +1,7 @@
 package awale.states;
 
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -10,16 +11,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
 import awale.boards.AwaleBoard;
+import awale.domains.Coordinate;
 import awale.domains.Game;
 
 public class HumanVsHumanState extends AwaleStates{
 	
-	private Map<Character,int[]> conversion;
-	private int[] coord = new int[2];
+	private Map<Character,Coordinate> conversion;
 	private Game currentGame;
 	private int[] scores;
 	private AwaleBoard board;
@@ -33,7 +33,7 @@ public class HumanVsHumanState extends AwaleStates{
 		int compteur = 0;
 		for(int i = 0;i < 2;i++) {
 			for(int j = 0;j < 6;j++) {
-				conversion.put(azerty.charAt(compteur), new int[] {i,j});
+				conversion.put(azerty.charAt(compteur), new Coordinate (i,j));
 				compteur++;
 			}
 		}
@@ -44,6 +44,7 @@ public class HumanVsHumanState extends AwaleStates{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.currentGame = new Game();
 		font = new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false);
+		winner = new ArrayList<>();
 	}
 
 	@Override
@@ -68,9 +69,6 @@ public class HumanVsHumanState extends AwaleStates{
 		}
 		
 		
-		
-		
-		
 	}
 
 	@Override
@@ -86,15 +84,20 @@ public class HumanVsHumanState extends AwaleStates{
 			sb.enterState(3);
 		}
 		
-		coord = conversion.get(c);
+		Coordinate coord = conversion.get(c);
 		if(coord == null) {
-			coord = new int[] {-1,-1};
+			coord = new Coordinate(-1,-1);
 		}
 		if(currentGame.isCycling()) {
+			currentGame.end();
 			sb.enterState(3);
 		}
-		if(coord[0] >= 0 && currentGame.giveCoord(coord)) {
+		
+		if(coord.getX() >= 0 && currentGame.giveCoord(coord) == 1) {
 			currentGame.play();
+		}else if(currentGame.giveCoord(coord) == -1) {
+			super.setWinner(currentGame.end());
+			sb.enterState(3);
 		}
 		
 	}
