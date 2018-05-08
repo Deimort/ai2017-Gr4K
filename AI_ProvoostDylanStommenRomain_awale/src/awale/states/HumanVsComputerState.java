@@ -90,6 +90,7 @@ public class HumanVsComputerState extends AwaleStates{
 	
 	@Override
 	public void keyPressed(int key,char c) {
+<<<<<<< HEAD
 		Coordinate coord = conversion.get(c);
 		
 		if(coord == null) {
@@ -106,6 +107,10 @@ public class HumanVsComputerState extends AwaleStates{
 			winner.clear();
 			winner.add(currentGame.end());
 			sb.enterState(3);
+=======
+		if(key == Input.KEY_SPACE) {
+			setState(3);
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 

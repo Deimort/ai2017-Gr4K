@@ -91,6 +91,10 @@ public class HumanVsHumanState extends AwaleStates{
 	
 	@Override
 	public void keyPressed(int key,char c) {
+
+		if(key == Input.KEY_SPACE) {
+			setState(3);
+		}
 		
 		Coordinate coord = conversion.get(c);
 		if(coord == null) {
@@ -108,7 +112,7 @@ public class HumanVsHumanState extends AwaleStates{
 		}else if(currentGame.giveCoord(coord) == -1) {
 			winner.clear();
 			winner.add(currentGame.end());
-			sb.enterState(3);
+			setState(3);
 		}
 	}
 
@@ -116,7 +120,7 @@ public class HumanVsHumanState extends AwaleStates{
 		if(currentGame.isCycling()) {
 			winner.clear();
 			winner.add(currentGame.end());
-			sb.enterState(3);
+			setState(3);
 		}
 	}
 

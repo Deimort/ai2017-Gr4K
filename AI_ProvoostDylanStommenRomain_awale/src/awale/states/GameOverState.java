@@ -38,9 +38,10 @@ public class GameOverState extends AwaleStates{
 	}
 	@Override
 	public void keyPressed(int key,char c) {
-		if(key == Input.KEY_SPACE) {
-			sb.enterState(0);
+		if(key == Input.KEY_SPACE && winnerString != null) {
+			setState(0);
 		}
+		
 	}
 
 }
