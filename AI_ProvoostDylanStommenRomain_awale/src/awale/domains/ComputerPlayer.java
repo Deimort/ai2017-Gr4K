@@ -36,7 +36,6 @@ public class ComputerPlayer implements Player{
 	
 	public int setCurrentCoord(Coordinate currentCoord,AwaleBoard ab,boolean starvation) {
 		this.currentCoord = max(ab,starvation);
-		
 		return 1;
 	}
 
