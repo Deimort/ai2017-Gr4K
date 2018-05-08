@@ -28,14 +28,19 @@ public class AwaleBoard {
 		board[coord.getX()][coord.getY()] = 0;
 		while (nbSeed > 0) {
 			newCoord = determineCoordSow(newCoord);
-			if(newCoord.getX() == coord.getX() && newCoord.getY() == coord.getY()) {
-				board[newCoord.getX()][newCoord.getY()] = 0;
-			}else {
-				board[newCoord.getX()][newCoord.getY()] += 1;
-				nbSeed--;
-			}
+			nbSeed = checkIfNotOriginHole(coord, nbSeed, newCoord);
 		}
 		return newCoord;
+	}
+
+	private int checkIfNotOriginHole(Coordinate coord, int nbSeed, Coordinate newCoord) {
+		if(newCoord.getX() == coord.getX() && newCoord.getY() == coord.getY()) {
+			board[newCoord.getX()][newCoord.getY()] = 0;
+		}else {
+			board[newCoord.getX()][newCoord.getY()] += 1;
+			nbSeed--;
+		}
+		return nbSeed;
 	}
 
 	private Coordinate determineCoordSow(Coordinate coord) {

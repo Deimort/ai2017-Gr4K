@@ -14,8 +14,8 @@ public class Game {
 	private boolean isCycling = false;
 	private boolean turn;
 	
-	public Game() {
-		players = new Player[] {HumanPlayer.ofId(0),HumanPlayer.ofId(1)};
+	public Game(Player player1,Player player2) {
+		players = new Player[] {player1,player2};
 		currentPlayer = players[0];
 		currentBoard = new AwaleBoard();
 		turn = false;
@@ -72,10 +72,7 @@ public class Game {
 	
 	public String end() {
 		String winner = "Égalité";
-		for(int i = 0;i < 6;i++) {
-			players[0].setScore(currentBoard.getSeeds(players[0].getId(),i));
-			players[1].setScore(currentBoard.getSeeds(players[1].getId(),i));
-		}
+		setPlayerScore();
 		
 		if(players[0].getScore() > players[1].getScore()) {
 			winner = "Joueur 1";
@@ -84,6 +81,13 @@ public class Game {
 		}
 		
 		return winner;
+	}
+
+	private void setPlayerScore() {
+		for(int i = 0;i < 6;i++) {
+			players[0].setScore(currentBoard.getSeeds(players[0].getId(),i));
+			players[1].setScore(currentBoard.getSeeds(players[1].getId(),i));
+		}
 	}
 
 }

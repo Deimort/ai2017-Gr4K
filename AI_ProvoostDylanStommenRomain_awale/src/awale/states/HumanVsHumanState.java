@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import awale.boards.AwaleBoard;
 import awale.domains.Coordinate;
 import awale.domains.Game;
+import awale.domains.HumanPlayer;
 
 public class HumanVsHumanState extends AwaleStates{
 	
@@ -44,7 +45,7 @@ public class HumanVsHumanState extends AwaleStates{
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.currentGame = new Game();
+		this.currentGame = new Game(HumanPlayer.ofId(0),HumanPlayer.ofId(1));
 		font = new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false);
 	}
 
@@ -54,13 +55,23 @@ public class HumanVsHumanState extends AwaleStates{
 		g.setFont(font);
 		g.setColor(Color.white);
 		
-		g.drawString("JOUEUR CONTRE JOUEUR ", 20, 40);
-		g.drawString("PLAYER 1 : " + scores[0], 20, 70);
-		g.drawString("PLAYER 2 : " + scores[1], 20, 100);
+		drawScore(g);
 		
 		g.setColor(Color.yellow);
 		g.drawString("AU TOUR DU JOUEUR " + (currentGame.getCurrentPlayerID() + 1), 20, 130);
 		
+		generateSquare(g);
+		
+		
+	}
+
+	private void drawScore(Graphics g) {
+		g.drawString("JOUEUR CONTRE JOUEUR ", 20, 40);
+		g.drawString("PLAYER 1 : " + scores[0], 20, 70);
+		g.drawString("PLAYER 2 : " + scores[1], 20, 100);
+	}
+
+	private void generateSquare(Graphics g) {
 		g.setColor(Color.white);
 		for(int ligne = 0; ligne < 2; ligne++) {
 			for(int colonne = 0; colonne < 6; colonne++) {
@@ -68,8 +79,6 @@ public class HumanVsHumanState extends AwaleStates{
 				g.drawString(String.format("%02d", board.getSeeds(ligne, colonne)), 145+colonne*100, 240+ ligne*100);
 			}
 		}
-		
-		
 	}
 
 	@Override
@@ -77,24 +86,23 @@ public class HumanVsHumanState extends AwaleStates{
 		this.scores = currentGame.getScores();
 		board = currentGame.getCurrentBoard();
 		
+		
 	}
 	
 	@Override
 	public void keyPressed(int key,char c) {
-		if(key == Input.KEY_SPACE) {
-			sb.enterState(3);
-		}
 		
 		Coordinate coord = conversion.get(c);
 		if(coord == null) {
 			coord = new Coordinate(-1,-1);
 		}
-		if(currentGame.isCycling()) {
-			winner.clear();
-			winner.add(currentGame.end());
-			sb.enterState(3);
-		}
+		isCycling();
 		
+		play(coord);
+		
+	}
+
+	private void play(Coordinate coord) {
 		if(coord.getX() >= 0 && currentGame.giveCoord(coord) == 1) {
 			currentGame.play();
 		}else if(currentGame.giveCoord(coord) == -1) {
@@ -102,7 +110,14 @@ public class HumanVsHumanState extends AwaleStates{
 			winner.add(currentGame.end());
 			sb.enterState(3);
 		}
-		
+	}
+
+	private void isCycling() {
+		if(currentGame.isCycling()) {
+			winner.clear();
+			winner.add(currentGame.end());
+			sb.enterState(3);
+		}
 	}
 
 }
