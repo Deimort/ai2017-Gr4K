@@ -39,20 +39,18 @@ public class MenuGameState extends AwaleStates{
 	public void keyPressed(int key,char c) {
 		if(key == Input.KEY_H) {
 			try {
-				sb.getState(1).init(sb.getContainer(),sb);
+				getState(1).init(getContainer(), getStateBasedGame());
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
-			sb.enterState(1);
+			setState(1);
 		}
 		else if(key == Input.KEY_M) {
-			sb.enterState(2);
+			setState(2);
 		}
 		else if(key == Input.KEY_Q) {
-			sb.getContainer().exit();
+			exitGame();
 		}
-	}
-	
-	
+	}	
 
 }

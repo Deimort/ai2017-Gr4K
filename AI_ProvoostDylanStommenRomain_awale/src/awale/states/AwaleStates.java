@@ -7,13 +7,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class AwaleStates extends BasicGameState {
 	
 	private int id;
 	private String description;
-	protected StateBasedGame sb;
+	private StateBasedGame sb;
 	private Image background;
 
 	public AwaleStates(int id, String description,StateBasedGame sb) {
@@ -55,4 +56,23 @@ public class AwaleStates extends BasicGameState {
 		return background;
 	}
 
+	public void setState(int id) {
+		sb.enterState(id);
+	}
+	
+	public void exitGame() {
+		sb.getContainer().exit();
+	}
+	
+	public GameState getState(int id) {
+		return sb.getState(id);
+	}
+	
+	public GameContainer getContainer() {
+		return sb.getContainer();
+	}
+	
+	public StateBasedGame getStateBasedGame() {
+		return sb;
+	}
 }

@@ -41,7 +41,7 @@ public class HumanVsComputerState extends AwaleStates{
 	@Override
 	public void keyPressed(int key,char c) {
 		if(key == Input.KEY_SPACE) {
-			sb.enterState(3);
+			setState(3);
 		}
 	}
 
