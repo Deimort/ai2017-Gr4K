@@ -1,5 +1,7 @@
 package awale.domains;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -22,7 +24,7 @@ public interface Player {
 	public int setCurrentCoord(Coordinate currentCoord,AwaleBoard ab,boolean starvation);
 	
 	public default int coordWhenStarvation(Coordinate coord,AwaleBoard ab) {
-		Set<Coordinate> coordPossible = new TreeSet<>();
+		List<Coordinate> coordPossible = new ArrayList<>();
 		determineCoordStarvation(coordPossible,ab);
 		if(coordPossible.contains(coord)) {
 			return 1;
@@ -33,7 +35,7 @@ public interface Player {
 		}
 	}
 	
-	public default void determineCoordStarvation(Set<Coordinate> coordPossible,AwaleBoard ab) {
+	public default void determineCoordStarvation(List<Coordinate> coordPossible,AwaleBoard ab) {
 		if(getId() == 0) {
 			for(int i = 5;i >= 0;i--) {
 				if(i - ab.getSeeds(0, i) < 0) {

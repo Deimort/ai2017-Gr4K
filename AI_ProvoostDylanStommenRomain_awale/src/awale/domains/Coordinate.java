@@ -27,17 +27,25 @@ public class Coordinate implements Comparable<Coordinate> {
 	public void setY(int valeur) {
 		this.coord[1] += valeur;
 	}
+	
+	public boolean equals(Coordinate other) {
+		return this.getX() == other.getX() && this.getY() == other.getY();
+	}
 
 	@Override
 	public int compareTo(Coordinate other) {
 		Coordinate coord = (Coordinate) other;
-		if(this.getX() == coord.getX() && this.getY() == coord.getY()) {
+		if(equals(other)) {
 			return 0;
-		}else if(this.getX() < coord.getX() || (this.getX() == coord.getX() && this.getY() < coord.getY())) {
+		}else if(this.getX() < coord.getX() || isInferior(coord)) {
 			return -1;
 		}else {
 			return 1;
 		}
+	}
+
+	private boolean isInferior(Coordinate other) {
+		return this.getX() == other.getX() && this.getY() < other.getY();
 	}
 
 }

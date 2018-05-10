@@ -90,7 +90,6 @@ public class HumanVsComputerState extends AwaleStates{
 	
 	@Override
 	public void keyPressed(int key,char c) {
-<<<<<<< HEAD
 		Coordinate coord = conversion.get(c);
 		
 		if(coord == null) {
@@ -106,12 +105,9 @@ public class HumanVsComputerState extends AwaleStates{
 		if(currentGame.isCycling()) {
 			winner.clear();
 			winner.add(currentGame.end());
-			sb.enterState(3);
-=======
-		if(key == Input.KEY_SPACE) {
 			setState(3);
->>>>>>> refs/remotes/origin/master
 		}
+		
 	}
 
 	private void play(Coordinate coord) {
@@ -120,18 +116,13 @@ public class HumanVsComputerState extends AwaleStates{
 		}else if(currentGame.giveCoord(coord) == -1) {
 			winner.clear();
 			winner.add(currentGame.end());
-			sb.enterState(3);
+			setState(3);
 		}
 	}
 
 	private void moveBoard(Coordinate coord) {
 		currentGame.play();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		currentGame.giveCoord(coord);
 		currentGame.play();
 	}

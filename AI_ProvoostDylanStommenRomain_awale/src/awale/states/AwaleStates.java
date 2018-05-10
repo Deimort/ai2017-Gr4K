@@ -72,7 +72,12 @@ public class AwaleStates extends BasicGameState {
 		return sb.getContainer();
 	}
 	
-	public StateBasedGame getStateBasedGame() {
-		return sb;
+	
+	public void initNewGame(int id) {
+		try {
+			getState(id).init(getContainer(), sb);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 }
