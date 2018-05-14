@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class AwaleGame extends StateBasedGame {

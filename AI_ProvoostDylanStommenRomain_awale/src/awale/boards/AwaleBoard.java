@@ -44,9 +44,9 @@ public class AwaleBoard {
 	}
 
 	private Coordinate determineCoordSow(Coordinate coord) {
-		if(coord.getX() == 0 && coord.getY() == 0) {
+		if(checkIfBeginningFirstRow(coord)) {
 			coord = new Coordinate(1,0);
-		}else if(coord.getX() == 1 && coord.getY() == 5) {
+		}else if(checkIfBeginningSecondRow(coord)) {
 			coord = new Coordinate(0,5);
 		}else {
 			if(coord.getX() == 0) {
@@ -56,6 +56,14 @@ public class AwaleBoard {
 			}
 		}
 		return coord;
+	}
+
+	private boolean checkIfBeginningSecondRow(Coordinate coord) {
+		return coord.getX() == 1 && coord.getY() == 5;
+	}
+
+	private boolean checkIfBeginningFirstRow(Coordinate coord) {
+		return coord.getX() == 0 && coord.getY() == 0;
 	}
 	
 	private int eat(Coordinate coord) {
@@ -80,18 +88,30 @@ public class AwaleBoard {
 	}
 	
 	private Coordinate determineCoordEat(Coordinate coord) {
-		if(coord.getX() == 0 && coord.getY() == 5) {
+		if(checkIfEndFirstRow(coord)) {
 			coord = new Coordinate(0,5);
-		}else if(coord.getX() == 1 && coord.getY() == 0) {
+		}else if(checkIfEndSecondRow(coord)) {
 			coord = new Coordinate(1,0);
 		}else {
-			if(coord.getX() == 0) {
-				coord.setY(1);
-			}else {
-				coord.setY(-1);
-			}
+			incrementY(coord);
 		}
 		return coord;
+	}
+
+	private boolean checkIfEndFirstRow(Coordinate coord) {
+		return coord.getX() == 0 && coord.getY() == 5;
+	}
+
+	private boolean checkIfEndSecondRow(Coordinate coord) {
+		return coord.getX() == 1 && coord.getY() == 0;
+	}
+
+	private void incrementY(Coordinate coord) {
+		if(coord.getX() == 0) {
+			coord.setY(1);
+		}else {
+			coord.setY(-1);
+		}
 	}
 	
 	public int getEatenSeeds() {

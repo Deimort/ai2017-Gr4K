@@ -3,9 +3,7 @@ package awale.domains;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import awale.boards.AwaleBoard;
 
@@ -39,18 +37,28 @@ public class ComputerPlayer implements Player{
 	}
 	
 	public int setCurrentCoord(Coordinate currentCoord,AwaleBoard ab,boolean starvation) {
-		this.currentCoord = max(ab,starvation);
+		this.currentCoord = max(ab,15,0,starvation);
+		if(starvation) {
+			return coordWhenStarvation(this.currentCoord, ab);
+		}
+		
 		return 1;
 	}
 
-	private Coordinate max(AwaleBoard ab, boolean starvation) {
+	private Coordinate max(AwaleBoard ab,int profondeurMax,int profondeur,boolean starvation) {
 		List<Coordinate> coord = determineCoord(ab,starvation);
 		
 		Map<Coordinate,AwaleBoard> boardsMap = generateBoardMap(coord,ab);
-		int maximum = Integer.MIN_VALUE;
+		
 		Coordinate goodMove = new Coordinate(1,0);
+		int valeur = 0;
+		int maximum = Integer.MIN_VALUE;
 		for(Map.Entry<Coordinate, AwaleBoard> entries : boardsMap.entrySet()) {
-			int valeur = min(entries.getValue());
+			if(profondeur <= profondeurMax) {
+				valeur = min(entries.getValue(),profondeurMax,profondeur+1);
+			}else {
+				valeur = entries.getValue().getEatenSeeds();
+			}
 			if(valeur > maximum) {
 				maximum = valeur;
 				goodMove = entries.getKey();
@@ -69,13 +77,20 @@ public class ComputerPlayer implements Player{
 		return coord;
 	}
 
-	private int min(AwaleBoard ab){
+	private int min(AwaleBoard ab,int profondeurMax,int profondeur){
 		List<Coordinate> coord = determineCoord(ab, ab.checkStarvation(getId()));
 		Map<Coordinate,AwaleBoard> boardMap = generateBoardMap(coord,ab);
 		int minimum = Integer.MAX_VALUE;
 		for(Map.Entry<Coordinate, AwaleBoard> entries : boardMap.entrySet()) {
 			AwaleBoard playerMove = entries.getValue();
-			int valeur = ab.getEatenSeeds() - playerMove.getEatenSeeds();
+			int valeur = 0;
+			if(profondeur <= profondeurMax) {
+				AwaleBoard max = ab.play(max(playerMove,profondeurMax,++profondeur,playerMove.checkStarvation(0)));
+				valeur = ab.getEatenSeeds() - max.getEatenSeeds();
+			}else {
+				valeur = ab.getEatenSeeds() - playerMove.getEatenSeeds();
+			}
+			
 			if(valeur < minimum) {
 				minimum = valeur;
 			}

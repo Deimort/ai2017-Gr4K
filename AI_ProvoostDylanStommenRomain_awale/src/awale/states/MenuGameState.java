@@ -42,6 +42,7 @@ public class MenuGameState extends AwaleStates{
 			setState(1);
 		}
 		else if(key == Input.KEY_M) {
+			initNewGame(2);
 			setState(2);
 		}
 		else if(key == Input.KEY_Q) {

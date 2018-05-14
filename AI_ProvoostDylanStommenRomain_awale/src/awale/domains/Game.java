@@ -89,5 +89,9 @@ public class Game {
 			players[1].setScore(currentBoard.getSeeds(players[1].getId(),i));
 		}
 	}
+	
+	public boolean starvationSelf() {
+		return currentBoard.checkStarvation(currentPlayer.getId());
+	}
 
 }

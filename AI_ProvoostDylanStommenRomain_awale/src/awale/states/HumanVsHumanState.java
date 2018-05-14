@@ -8,7 +8,6 @@ import java.util.TreeMap;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
@@ -91,16 +90,12 @@ public class HumanVsHumanState extends AwaleStates{
 	
 	@Override
 	public void keyPressed(int key,char c) {
-
-		if(key == Input.KEY_SPACE) {
-			setState(3);
-		}
-		
+	
 		Coordinate coord = conversion.get(c);
 		if(coord == null) {
 			coord = new Coordinate(-1,-1);
 		}
-		isCycling();
+		isCyclingOrWinningStarv();
 		
 		play(coord);
 		
@@ -116,8 +111,8 @@ public class HumanVsHumanState extends AwaleStates{
 		}
 	}
 
-	private void isCycling() {
-		if(currentGame.isCycling()) {
+	private void isCyclingOrWinningStarv() {
+		if(currentGame.isCycling() || currentGame.starvationSelf()) {
 			winner.clear();
 			winner.add(currentGame.end());
 			setState(3);

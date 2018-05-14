@@ -27,10 +27,6 @@ public class Coordinate implements Comparable<Coordinate> {
 	public void setY(int valeur) {
 		this.coord[1] += valeur;
 	}
-	
-	public boolean equals(Coordinate other) {
-		return this.getX() == other.getX() && this.getY() == other.getY();
-	}
 
 	@Override
 	public int compareTo(Coordinate other) {
@@ -42,6 +38,17 @@ public class Coordinate implements Comparable<Coordinate> {
 		}else {
 			return 1;
 		}
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other instanceof Coordinate) {
+			Coordinate c = (Coordinate)other;
+			return this.getX() == c.getX() && this.getY() == c.getY();
+		}else {
+			return false;
+		}
+		
 	}
 
 	private boolean isInferior(Coordinate other) {
