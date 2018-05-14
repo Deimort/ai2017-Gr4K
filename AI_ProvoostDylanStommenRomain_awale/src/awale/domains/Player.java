@@ -44,7 +44,7 @@ public interface Player {
 
 	public default void addPossibleCoordSecondRow(List<Coordinate> coordPossible, AwaleBoard ab) {
 		for(int i = 0;i < 6;i++) {
-			if(i + ab.getSeeds(0, i) > 5) {
+			if(i + ab.getSeeds(1, i) > 5) {
 				coordPossible.add(new Coordinate(1,i));
 			}
 		}
