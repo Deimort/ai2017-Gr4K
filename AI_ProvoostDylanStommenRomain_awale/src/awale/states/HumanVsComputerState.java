@@ -122,9 +122,11 @@ public class HumanVsComputerState extends AwaleStates{
 
 	private void moveBoard(Coordinate coord) {
 		currentGame.play();
+		
 		if(currentGame.giveCoord(coord) == -1) {
 			endGame();
 		}
+	
 		isCycling();
 		
 		currentGame.play();

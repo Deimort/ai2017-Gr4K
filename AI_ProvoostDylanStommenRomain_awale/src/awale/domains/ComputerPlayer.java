@@ -56,7 +56,7 @@ public class ComputerPlayer implements Player{
 
 	private Coordinate calculateMax(int profondeurMax, int profondeur, Map<Coordinate, AwaleBoard> boardsMap) {
 		int maximum = Integer.MIN_VALUE;
-		Coordinate goodMove = new Coordinate(-1,-1);
+		Coordinate goodMove = new Coordinate(1,0);
 		for(Map.Entry<Coordinate, AwaleBoard> entries : boardsMap.entrySet()) {
 			int valeur = getValueMax(profondeurMax, profondeur, entries);
 			if(valeur > maximum) {
@@ -68,11 +68,9 @@ public class ComputerPlayer implements Player{
 	}
 
 	private int getValueMax(int profondeurMax, int profondeur, Map.Entry<Coordinate, AwaleBoard> entries) {
-		int valeur;
+		int valeur = entries.getValue().getEatenSeeds();
 		if(profondeur <= profondeurMax) {
 			valeur = min(entries.getValue(),profondeurMax,profondeur+1);
-		}else {
-			valeur = entries.getValue().getEatenSeeds();
 		}
 		return valeur;
 	}
@@ -109,12 +107,10 @@ public class ComputerPlayer implements Player{
 	private int getValueMin(AwaleBoard ab, int profondeurMax, int profondeur,
 			Map.Entry<Coordinate, AwaleBoard> entries) {
 		AwaleBoard playerMove = entries.getValue();
-		int valeur = 0;
+		int valeur = ab.getEatenSeeds() - playerMove.getEatenSeeds();
 		if(profondeur <= profondeurMax) {
 			AwaleBoard max = ab.play(max(playerMove,profondeurMax,profondeur+1,playerMove.checkStarvation(0)));
 			valeur = ab.getEatenSeeds() - max.getEatenSeeds();
-		}else {
-			valeur = ab.getEatenSeeds() - playerMove.getEatenSeeds();
 		}
 		return valeur;
 	}
