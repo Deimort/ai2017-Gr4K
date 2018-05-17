@@ -1,7 +1,6 @@
 package awale.states;
 
 import java.awt.Font;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,6 +16,7 @@ import awale.boards.Coordinate;
 import awale.domains.ComputerPlayer;
 import awale.domains.Game;
 import awale.domains.HumanPlayer;
+import awale.domains.Statistics;
 
 public class HumanVsComputerState extends AwaleStates{
 	
@@ -25,9 +25,10 @@ public class HumanVsComputerState extends AwaleStates{
 	private int[] scores;
 	private AwaleBoard board;
 	private TrueTypeFont font;
-	private List<String> winner;
+	private Statistics stats;
+	private int currentGameTime;
 
-	public HumanVsComputerState(StateBasedGame sb,List<String> winner) {
+	public HumanVsComputerState(StateBasedGame sb,Statistics stats) {
 	
 		super(2, "HumanVsComputer",sb);
 		conversion = new TreeMap<>();
@@ -38,7 +39,7 @@ public class HumanVsComputerState extends AwaleStates{
 			compteur++;
 		}
 		
-		this.winner = winner;
+		this.stats = stats;
 		
 	}
 	
@@ -46,7 +47,7 @@ public class HumanVsComputerState extends AwaleStates{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.currentGame = new Game(HumanPlayer.ofId(0),ComputerPlayer.ofId(1));
 		font = new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false);
-		
+		currentGameTime = 0;
 	}
 
 	@Override
@@ -84,7 +85,7 @@ public class HumanVsComputerState extends AwaleStates{
 	public void update(GameContainer gc, StateBasedGame sbg, int deltaTime) throws SlickException {
 		this.scores = currentGame.getScores();
 		board = currentGame.getCurrentBoard();
-		
+		currentGameTime += deltaTime;
 	}
 	
 	@Override
@@ -115,8 +116,7 @@ public class HumanVsComputerState extends AwaleStates{
 	}
 
 	private void endGame() {
-		winner.clear();
-		winner.add(currentGame.end());
+		stats.endGame(currentGameTime, currentGame.getScores());
 		setState(3);
 	}
 

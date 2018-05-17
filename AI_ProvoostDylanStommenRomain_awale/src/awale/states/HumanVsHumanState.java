@@ -1,7 +1,6 @@
 package awale.states;
 
 import java.awt.Font;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -16,6 +15,7 @@ import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 import awale.domains.Game;
 import awale.domains.HumanPlayer;
+import awale.domains.Statistics;
 
 public class HumanVsHumanState extends AwaleStates{
 	
@@ -24,10 +24,11 @@ public class HumanVsHumanState extends AwaleStates{
 	private int[] scores;
 	private AwaleBoard board;
 	private TrueTypeFont font;
-	private List<String> winner;
+	private Statistics stats;
+	private int currentGameTime;
 
 	MenuGameState ms;
-	public HumanVsHumanState(StateBasedGame sb,List<String> winner) {
+	public HumanVsHumanState(StateBasedGame sb,Statistics stats) {
 		super(1, "HumanVsHuman",sb);
 		conversion = new TreeMap<>();
 		String azerty = "azertyqsdfgh";
@@ -38,7 +39,7 @@ public class HumanVsHumanState extends AwaleStates{
 				compteur++;
 			}
 		}
-		this.winner = winner;
+		this.stats = stats;
 		
 	}
 	
@@ -46,6 +47,7 @@ public class HumanVsHumanState extends AwaleStates{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.currentGame = new Game(HumanPlayer.ofId(0),HumanPlayer.ofId(1));
 		font = new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false);
+		currentGameTime = 0;
 	}
 
 	@Override
@@ -84,7 +86,7 @@ public class HumanVsHumanState extends AwaleStates{
 	public void update(GameContainer gc, StateBasedGame sbg, int deltaTime) throws SlickException {
 		this.scores = currentGame.getScores();
 		board = currentGame.getCurrentBoard();
-		
+		currentGameTime += deltaTime;
 		
 	}
 	
@@ -108,17 +110,18 @@ public class HumanVsHumanState extends AwaleStates{
 		if(coord.getX() >= 0 && currentGame.giveCoord(coord) == 1) {
 			currentGame.play();
 		}else if(currentGame.giveCoord(coord) == -1) {
-			winner.clear();
-			winner.add(currentGame.end());
-			setState(3);
+			endGame();
 		}
+	}
+
+	private void endGame() {
+		stats.endGame(currentGameTime, currentGame.getScores());
+		setState(3);
 	}
 
 	private void isCyclingOrWinningStarv() {
 		if(currentGame.isCycling() || currentGame.starvationSelf()) {
-			winner.clear();
-			winner.add(currentGame.end());
-			setState(3);
+			endGame();
 		}
 	}
 

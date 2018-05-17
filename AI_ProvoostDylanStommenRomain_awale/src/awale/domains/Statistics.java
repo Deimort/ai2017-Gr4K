@@ -12,7 +12,7 @@ public class Statistics {
 	public Statistics() {
 		currentGameTime = 0;
 		totalTime = 0;
-		minTime = 0;
+		minTime = Integer.MAX_VALUE;
 		maxTime = 0;
 		scores = new int[2];
 		winnerId = 0;
@@ -64,10 +64,6 @@ public class Statistics {
 		return getTime(currentGameTime);
 	}
 
-	public String getTotalTime() {
-		return getTime(totalTime);
-	}
-
 	public String getMinTime() {
 		return getTime(minTime);
 	}
@@ -90,6 +86,16 @@ public class Statistics {
 
 	public int getVictories(int id) {
 		return victories[id];
+	}
+	
+	public String getAverageTime() {
+		String time;
+		try {
+			time = getTime(totalTime / gameCount);
+		} catch (ArithmeticException e) {
+			time = "00:00";
+		}
+		return time;
 	}
 
 }
