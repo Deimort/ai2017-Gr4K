@@ -2,8 +2,6 @@ package awale.boards;
 
 import java.util.Arrays;
 
-import awale.domains.Coordinate;
-
 public class AwaleBoard {
 	
 	private final int[][] board;

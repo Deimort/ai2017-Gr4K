@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import awale.boards.AwaleBoard;
+import awale.boards.Coordinate;
 
 public class Game {
 	
@@ -17,7 +18,7 @@ public class Game {
 	public Game(Player player1,Player player2) {
 		players = new Player[] {player1,player2};
 		currentPlayer = players[0];
-		currentBoard = new AwaleBoard(new int[][] {{1,0,0,0,0,0},{0,0,0,0,0,1}},0);
+		currentBoard = new AwaleBoard();
 		turn = false;
 	}
 	

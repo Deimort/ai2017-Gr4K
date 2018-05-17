@@ -13,7 +13,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
 import awale.boards.AwaleBoard;
-import awale.domains.Coordinate;
+import awale.boards.Coordinate;
 import awale.domains.Game;
 import awale.domains.HumanPlayer;
 

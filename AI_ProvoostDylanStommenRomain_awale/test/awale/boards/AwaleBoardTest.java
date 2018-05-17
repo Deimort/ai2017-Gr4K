@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import awale.boards.AwaleBoard;
-import awale.domains.Coordinate;
 
 public class AwaleBoardTest {
 	private AwaleBoard ab;

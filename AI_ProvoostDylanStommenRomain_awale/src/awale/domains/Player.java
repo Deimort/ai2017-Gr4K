@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import awale.boards.AwaleBoard;
+import awale.boards.Coordinate;
 
 public interface Player {
 	

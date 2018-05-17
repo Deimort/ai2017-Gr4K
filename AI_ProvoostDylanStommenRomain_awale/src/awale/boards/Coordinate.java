@@ -1,4 +1,4 @@
-package awale.domains;
+package awale.boards;
 
 public class Coordinate implements Comparable<Coordinate> {
 	

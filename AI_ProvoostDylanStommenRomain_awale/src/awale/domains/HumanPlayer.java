@@ -1,6 +1,7 @@
 package awale.domains;
 
 import awale.boards.AwaleBoard;
+import awale.boards.Coordinate;
 
 public class HumanPlayer implements Player {
 	private int score;

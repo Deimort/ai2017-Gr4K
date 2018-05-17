@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import awale.boards.AwaleBoard;
+import awale.boards.Coordinate;
 
 public class ComputerPlayer implements Player{
 	private int id;
@@ -50,21 +51,30 @@ public class ComputerPlayer implements Player{
 		
 		Map<Coordinate,AwaleBoard> boardsMap = generateBoardMap(coord,ab);
 		
-		Coordinate goodMove = new Coordinate(1,0);
-		int valeur = 0;
+		return calculateMax(profondeurMax, profondeur, boardsMap);
+	}
+
+	private Coordinate calculateMax(int profondeurMax, int profondeur, Map<Coordinate, AwaleBoard> boardsMap) {
 		int maximum = Integer.MIN_VALUE;
+		Coordinate goodMove = new Coordinate(-1,-1);
 		for(Map.Entry<Coordinate, AwaleBoard> entries : boardsMap.entrySet()) {
-			if(profondeur <= profondeurMax) {
-				valeur = min(entries.getValue(),profondeurMax,profondeur+1);
-			}else {
-				valeur = entries.getValue().getEatenSeeds();
-			}
+			int valeur = getValueMax(profondeurMax, profondeur, entries);
 			if(valeur > maximum) {
 				maximum = valeur;
 				goodMove = entries.getKey();
 			}
 		}
 		return goodMove;
+	}
+
+	private int getValueMax(int profondeurMax, int profondeur, Map.Entry<Coordinate, AwaleBoard> entries) {
+		int valeur;
+		if(profondeur <= profondeurMax) {
+			valeur = min(entries.getValue(),profondeurMax,profondeur+1);
+		}else {
+			valeur = entries.getValue().getEatenSeeds();
+		}
+		return valeur;
 	}
 	
 	private List<Coordinate> determineCoord(AwaleBoard ab, boolean starvation) {
@@ -80,22 +90,33 @@ public class ComputerPlayer implements Player{
 	private int min(AwaleBoard ab,int profondeurMax,int profondeur){
 		List<Coordinate> coord = determineCoord(ab, ab.checkStarvation(getId()));
 		Map<Coordinate,AwaleBoard> boardMap = generateBoardMap(coord,ab);
+		int minimum = calculateMin(ab, profondeurMax, profondeur, boardMap);
+		return minimum;
+	}
+
+	private int calculateMin(AwaleBoard ab, int profondeurMax, int profondeur, Map<Coordinate, AwaleBoard> boardMap) {
 		int minimum = Integer.MAX_VALUE;
 		for(Map.Entry<Coordinate, AwaleBoard> entries : boardMap.entrySet()) {
-			AwaleBoard playerMove = entries.getValue();
-			int valeur = 0;
-			if(profondeur <= profondeurMax) {
-				AwaleBoard max = ab.play(max(playerMove,profondeurMax,++profondeur,playerMove.checkStarvation(0)));
-				valeur = ab.getEatenSeeds() - max.getEatenSeeds();
-			}else {
-				valeur = ab.getEatenSeeds() - playerMove.getEatenSeeds();
-			}
+			int valeur = getValueMin(ab, profondeurMax, profondeur, entries);
 			
 			if(valeur < minimum) {
 				minimum = valeur;
 			}
 		}
 		return minimum;
+	}
+
+	private int getValueMin(AwaleBoard ab, int profondeurMax, int profondeur,
+			Map.Entry<Coordinate, AwaleBoard> entries) {
+		AwaleBoard playerMove = entries.getValue();
+		int valeur = 0;
+		if(profondeur <= profondeurMax) {
+			AwaleBoard max = ab.play(max(playerMove,profondeurMax,profondeur+1,playerMove.checkStarvation(0)));
+			valeur = ab.getEatenSeeds() - max.getEatenSeeds();
+		}else {
+			valeur = ab.getEatenSeeds() - playerMove.getEatenSeeds();
+		}
+		return valeur;
 	}
 	
 	private Map<Coordinate,AwaleBoard> generateBoardMap(List<Coordinate> coordinates,AwaleBoard ab) {
