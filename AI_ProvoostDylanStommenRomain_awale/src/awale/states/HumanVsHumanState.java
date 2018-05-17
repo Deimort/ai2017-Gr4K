@@ -95,6 +95,9 @@ public class HumanVsHumanState extends AwaleStates{
 		if(coord == null) {
 			coord = new Coordinate(-1,-1);
 		}
+		if(c == 'p') {
+			setState(3);
+		}
 		isCyclingOrWinningStarv();
 		
 		play(coord);
