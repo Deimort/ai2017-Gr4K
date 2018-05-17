@@ -86,10 +86,8 @@ public class AwaleBoard {
 	}
 	
 	private Coordinate determineCoordEat(Coordinate coord) {
-		if(checkIfEndFirstRow(coord)) {
-			coord = new Coordinate(0,5);
-		}else if(checkIfEndSecondRow(coord)) {
-			coord = new Coordinate(1,0);
+		if(checkIfEndFirstRow(coord) || checkIfEndSecondRow(coord)) {
+			return coord;
 		}else {
 			incrementY(coord);
 		}
