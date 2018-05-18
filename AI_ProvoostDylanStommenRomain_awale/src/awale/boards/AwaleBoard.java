@@ -36,9 +36,11 @@ public class AwaleBoard {
 	
 	
 	/**
-	 * 
-	 * @param coord
-	 * @return
+	 * Sème les graines contenues dans le trou désigné par la coordonnée. L'OCT de l'algorithme est de l'ordre
+	 * de O(n), car il n'y a qu'une seule boucle qui, dans le pire des cas, doit faire une ou plusieurs fois
+	 * le tour du plateau.
+	 * @param coord coordonnée du trou que l'on souhaite semer
+	 * @return la coordonnée du trou où la dernière graine a été semée
 	 */
 	private Coordinate sow(Coordinate coord) {
 		int nbSeed = board[coord.getX()][coord.getY()];
@@ -84,6 +86,13 @@ public class AwaleBoard {
 		return coord.getX() == 0 && coord.getY() == 0;
 	}
 	
+	/**
+	 * Mange les graines possibles dans le sens horaire à partir de la coordonnée passée en paramètre. L'OCT de
+	 * l'algorithme est de l'ordre de O(N), car il n'y a qu'une seule boucle à travers le plateau. Dans le pire des
+	 * cas, on parcourrait quatre cases.
+	 * @param coord coordonnée du trou où la dernière graine a été semée
+	 * @return
+	 */
 	private int eat(Coordinate coord) {
 		int seedCount = 0;
 		int count = 0;
