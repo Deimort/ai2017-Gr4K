@@ -161,21 +161,13 @@ public class AwaleBoard {
 	
 	@Override
 	public int hashCode() {
-//		String[] code = new String[] {"",""};
-//		for(int i = 0;i < board.length;i++) {
-//			for(int j = 0;j < board[i].length;j++) {
-//				code[i] += board[i][j];
-//			}
-//		}
-//		
-//		return Integer.parseInt(code[0])+Integer.parseInt(code[1]);
-		int[] code = new int[2];
+		int code = 0;
 		for(int i = 0;i < board.length;i++) {
 			for(int j = 0;j < board[i].length;j++) {
-				code[i] += board[i][j];
+				code += board[i][j];
 			}
 		}
-		return code[0] + code[1];
+		return code;
 	}
 	
 

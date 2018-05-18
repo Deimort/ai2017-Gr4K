@@ -11,14 +11,25 @@ public class Game {
 	private Player[] players;
 	private Player currentPlayer;
 	private AwaleBoard currentBoard;
-	private Set<AwaleBoard> previousBoards = new HashSet<>();
-	private boolean isCycling = false;
+	private Set<AwaleBoard> previousBoards;
+	private boolean isCycling;
 	private boolean turn;
 	
 	public Game(Player player1,Player player2) {
 		players = new Player[] {player1,player2};
 		currentPlayer = players[0];
 		currentBoard = new AwaleBoard();
+		isCycling = false;
+		previousBoards = new HashSet<>();
+		turn = false;
+	}
+	
+	public Game(Player player1,Player player2,int[][] board) {
+		players = new Player[] {player1,player2};
+		currentPlayer = players[0];
+		currentBoard = new AwaleBoard(board,0);
+		isCycling = false;
+		previousBoards = new HashSet<>();
 		turn = false;
 	}
 	
@@ -35,8 +46,8 @@ public class Game {
 	}
 	
 	public void play() {
-		isCycling = previousBoards.contains(currentBoard);
-		previousBoards.add(currentBoard);
+		isCycling = !previousBoards.add(currentBoard);
+		
 		
 		currentBoard = currentBoard.play(currentPlayer.getCurrentCoord());
 		currentPlayer.setScore(currentBoard.getEatenSeeds());

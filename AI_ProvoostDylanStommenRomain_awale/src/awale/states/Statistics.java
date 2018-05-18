@@ -1,4 +1,4 @@
-package awale.domains;
+package awale.states;
 
 public class Statistics {
 	
@@ -27,7 +27,13 @@ public class Statistics {
 		setMaxTime(currentGameTime);
 		this.winnerId = getWinner(scores);
 		this.scores = scores;
+		incrementGames();
+	}
+
+	private void incrementGames() {
 		gameCount++;
+		
+		if(winnerId != -1)
 		victories[winnerId]++;
 	}
 

@@ -8,8 +8,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import awale.domains.Statistics;
-
 public class GameOverState extends AwaleStates{
 	private Statistics stats;
 
@@ -39,7 +37,7 @@ public class GameOverState extends AwaleStates{
 		
 		String winner = "Égalité";
 		if(stats.getWinnerId() != -1) {
-			winner = "VICTOIRE DU JOUEUR " + stats.getWinnerId();
+			winner = "VICTOIRE DU JOUEUR " + (stats.getWinnerId()+1);
 		}
 		
 		g.drawString(winner, 50, 300);

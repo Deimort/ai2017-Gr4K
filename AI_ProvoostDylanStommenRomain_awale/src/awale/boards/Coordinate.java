@@ -1,5 +1,9 @@
 package awale.boards;
 
+/**
+ * Permets de stocker et comparer des coordonnées entre elles.
+ *
+ */
 public class Coordinate implements Comparable<Coordinate> {
 	
 	private int[] coord;
@@ -12,18 +16,36 @@ public class Coordinate implements Comparable<Coordinate> {
 		this.coord = new int[] {coord.getX(),coord.getY()};
 	}
 	
+	/**
+	 * Retourne le point X de la coordonnée.
+	 * @return un entier représentant le point X de la coordonnée
+	 */
 	public int getX() {
 		return coord[0];
 	}
 	
+	
+	/**
+	 * Retourne le point Y de la coordonnée.
+	 * @return un entier représentant le point Y de la coordonnée
+	 */
 	public int getY() {
 		return coord[1];
 	}
 	
+	/**
+	 * Incrémente le point X de la coordonnée d'une valeur donnée.
+	 * @param valeur l'entier avec lequel on souhaite incrémenter X
+	 */
 	public void setX(int valeur) {
 		this.coord[0] += valeur;
 	}
 	
+	
+	/**
+	 * Incrémente le point Y de la coordonnée d'une valeur donnée.
+	 * @param valeur l'entier avec lequel on souhaite incrémenter Y
+	 */
 	public void setY(int valeur) {
 		this.coord[1] += valeur;
 	}

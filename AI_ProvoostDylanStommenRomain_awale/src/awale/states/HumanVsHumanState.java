@@ -4,32 +4,22 @@ import java.awt.Font;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
-import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 import awale.domains.Game;
 import awale.domains.HumanPlayer;
-import awale.domains.Statistics;
 
-public class HumanVsHumanState extends AwaleStates{
+public class HumanVsHumanState extends HumanVs{
 	
 	private Map<Character,Coordinate> conversion;
-	private Game currentGame;
-	private int[] scores;
-	private AwaleBoard board;
-	private TrueTypeFont font;
-	private Statistics stats;
-	private int currentGameTime;
+	
 
-	MenuGameState ms;
 	public HumanVsHumanState(StateBasedGame sb,Statistics stats) {
-		super(1, "HumanVsHuman",sb);
+		super(1, "HUMAIN",sb,stats);
 		conversion = new TreeMap<>();
 		String azerty = "azertyqsdfgh";
 		int compteur = 0;
@@ -39,56 +29,16 @@ public class HumanVsHumanState extends AwaleStates{
 				compteur++;
 			}
 		}
-		this.stats = stats;
 		
 	}
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.currentGame = new Game(HumanPlayer.ofId(0),HumanPlayer.ofId(1));
-		font = new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false);
-		currentGameTime = 0;
+		setGame(new Game(new HumanPlayer(0),new HumanPlayer(1)));
+		setFont(new TrueTypeFont(new java.awt.Font("RockWell", Font.PLAIN, 20), false));
+		setCurrentGameTime(0);
 	}
 
-	@Override
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		g.drawImage(getImage(), 0, 0);
-		g.setFont(font);
-		g.setColor(Color.white);
-		
-		drawScore(g);
-		
-		g.setColor(Color.yellow);
-		g.drawString("AU TOUR DU JOUEUR " + (currentGame.getCurrentPlayerID() + 1), 20, 130);
-		
-		generateSquare(g);
-		
-		
-	}
-
-	private void drawScore(Graphics g) {
-		g.drawString("JOUEUR CONTRE JOUEUR ", 20, 40);
-		g.drawString("PLAYER 1 : " + scores[0], 20, 70);
-		g.drawString("PLAYER 2 : " + scores[1], 20, 100);
-	}
-
-	private void generateSquare(Graphics g) {
-		g.setColor(Color.white);
-		for(int ligne = 0; ligne < 2; ligne++) {
-			for(int colonne = 0; colonne < 6; colonne++) {
-				g.drawRect(100+colonne*100, 200 + ligne*100, 100, 100);
-				g.drawString(String.format("%02d", board.getSeeds(ligne, colonne)), 145+colonne*100, 240+ ligne*100);
-			}
-		}
-	}
-
-	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int deltaTime) throws SlickException {
-		this.scores = currentGame.getScores();
-		board = currentGame.getCurrentBoard();
-		currentGameTime += deltaTime;
-		
-	}
 	
 	@Override
 	public void keyPressed(int key,char c) {
@@ -98,8 +48,9 @@ public class HumanVsHumanState extends AwaleStates{
 			coord = new Coordinate(-1,-1);
 		}
 		if(c == 'p') {
-			setState(3);
+			endGame();
 		}
+		
 		isCyclingOrWinningStarv();
 		
 		play(coord);
@@ -107,22 +58,12 @@ public class HumanVsHumanState extends AwaleStates{
 	}
 
 	private void play(Coordinate coord) {
-		if(coord.getX() >= 0 && currentGame.giveCoord(coord) == 1) {
-			currentGame.play();
-		}else if(currentGame.giveCoord(coord) == -1) {
+		if(coord.getX() >= 0 && this.giveCoord(coord) == 1) {
+			play();
+		}else if(giveCoord(coord) == -1) {
 			endGame();
 		}
 	}
 
-	private void endGame() {
-		stats.endGame(currentGameTime, currentGame.getScores());
-		setState(3);
-	}
-
-	private void isCyclingOrWinningStarv() {
-		if(currentGame.isCycling() || currentGame.starvationSelf()) {
-			endGame();
-		}
-	}
 
 }

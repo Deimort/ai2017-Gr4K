@@ -17,7 +17,7 @@ public class HumanPlayerTest {
 	public void createParameters() {
 		starvationEnd = new AwaleBoard(new int[][] {{0,1,2,3,4,5},{0,0,0,0,0,0}},0);
 		starvation = new AwaleBoard(new int[][] {{0,6,2,3,4,5},{0,0,0,0,0,0}},0);
-		p1 = HumanPlayer.ofId(0);
+		p1 = new HumanPlayer(0);
 	}
 
 	@Test

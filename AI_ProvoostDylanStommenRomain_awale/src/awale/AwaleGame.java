@@ -2,11 +2,11 @@ package awale;
 
 import org.newdawn.slick.state.StateBasedGame;
 
-import awale.domains.Statistics;
 import awale.states.GameOverState;
 import awale.states.HumanVsComputerState;
 import awale.states.HumanVsHumanState;
 import awale.states.MenuGameState;
+import awale.states.Statistics;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;

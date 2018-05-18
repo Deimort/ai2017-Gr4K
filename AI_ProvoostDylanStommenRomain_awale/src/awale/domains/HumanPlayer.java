@@ -3,35 +3,24 @@ package awale.domains;
 import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 
-public class HumanPlayer implements Player {
-	private int score;
-	private int id;
+public class HumanPlayer extends Player {
 	private Coordinate currentCoord;
 	
-	public static HumanPlayer ofId(int id) {
-		HumanPlayer newPlayer = new HumanPlayer();
-		newPlayer.id = id;
-		newPlayer.score = 0;
-		
-		return newPlayer;
+	public HumanPlayer(int id) {
+		super(id);
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score += score;
-	}
-
-	public int getId() {
-		return id;
-	}
-
+	@Override
 	public Coordinate getCurrentCoord() {
 		return currentCoord;
 	}
-	
+	/*
+	 * Affecte l'argument currentCoord à l'attribut currentCoord du joueur, après avoir vérifier que
+	 * la coordonnée donnée en argument est valide (sur la ligne du joueur, avec plus de 0 graines)
+	 * et, si l'adversaire est en état de famine, on regarde si la coordonnée est valide
+	 * grâce à la méthode coordWhenStarvation.
+	 */
+	@Override
 	public int setCurrentCoord(Coordinate currentCoord,AwaleBoard ab,boolean starvation) {
 		this.currentCoord = new Coordinate(currentCoord);
 		if(starvation) {

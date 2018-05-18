@@ -8,35 +8,25 @@ import java.util.TreeMap;
 import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 
-public class ComputerPlayer implements Player{
-	private int id;
-	private int score;
+public class ComputerPlayer extends Player{
+	
 	private Coordinate currentCoord;
 	
-	public static ComputerPlayer ofId(int id) {
-		ComputerPlayer newPlayer = new ComputerPlayer();
-		newPlayer.id = id;
-		newPlayer.score = 0;
-		
-		return newPlayer;
+	public ComputerPlayer(int id) {
+		super(id);
 	}
 	
-	public int getScore() {
-		return score;
-	}
-	
-	public void setScore(int score) {
-		this.score += score;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	
+	@Override
 	public Coordinate getCurrentCoord() {
 		return currentCoord;
 	}
 	
+	/*
+	 * Rédéfinition dans laquelle on implémente l'algorithme minimax. L'argument currentCoord est
+	 * ignoré. Elle retourne désormais toujours 1 si la coordonnée est valide (elle l'est toujours)
+	 * ou -1 si il n'y pas de coordonnées valides possibles.
+	 */
+	@Override
 	public int setCurrentCoord(Coordinate currentCoord,AwaleBoard ab,boolean starvation) {
 		this.currentCoord = max(ab,4,0,starvation);
 		if(starvation) {
@@ -46,6 +36,15 @@ public class ComputerPlayer implements Player{
 		return 1;
 	}
 
+	/**
+	 * Calcule récursivement la meilleur coup en appelant la méthode min. Retourne la coordonnée
+	 * du meilleur coup possible selon les prédictions de l'algorithme.
+	 * @param ab AwaleBoard actuelle
+	 * @param profondeurMax Profondeur maximum à laquelle on souhaite arrêter la recherche des AwaleBoard possibles.
+	 * @param profondeur Profondeur actuelle de l'appel
+	 * @param starvation État de famine du joueur actuelle
+	 * @return la coordonnée du meilleur coup possible
+	 */
 	private Coordinate max(AwaleBoard ab,int profondeurMax,int profondeur,boolean starvation) {
 		List<Coordinate> coord = determineCoord(ab,starvation);
 		
@@ -84,6 +83,17 @@ public class ComputerPlayer implements Player{
 		}
 		return coord;
 	}
+	
+	/**
+	 * Calcule récursivement l'AwaleBoard ou la machine rassemble le moins de points. On calcule
+	 * cela en soustrayant les points gagnés par le joueur dans les AwaleBoard calculées au score
+	 * de la machine dans l'AwaleBoard passée en paramètre. Retourne la valeur minimum de toutes
+	 * les AwaleBoard calculées.
+	 * @param ab AwaleBoard du coup joué par la machine
+	 * @param profondeurMax Profondeur maximum à laquelle on souhaite arrêter la recherche des AwaleBoard possibles.
+	 * @param profondeur Profondeur actuelle de l'appel
+	 * @return la valeur minimum de toutes les AwaleBoard calculées
+	 */
 
 	private int min(AwaleBoard ab,int profondeurMax,int profondeur){
 		List<Coordinate> coord = determineCoord(ab, ab.checkStarvation(getId()));

@@ -13,7 +13,7 @@ public class ComputerPlayerTest {
 	
 	@Before
 	public void prepareComputer() {
-		cpu = ComputerPlayer.ofId(1);
+		cpu = new ComputerPlayer(1);
 	}
 
 	@Test
