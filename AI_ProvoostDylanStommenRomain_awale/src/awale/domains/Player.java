@@ -7,6 +7,10 @@ import java.util.List;
 import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 
+/**
+ * Définis un joueur basique, ainsi que les attributs et méthodes communs à tous les types de joueurs.
+ */
+
 public abstract class Player {
 	
 	private int id;

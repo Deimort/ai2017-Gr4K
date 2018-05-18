@@ -8,6 +8,11 @@ import java.util.TreeMap;
 import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 
+/**
+ * Implémente un joueur machine. Permets de calculer son coup grâce à l'algorithme minimax. Hérite de la classe
+ * abstraite Player.
+ */
+
 public class ComputerPlayer extends Player{
 	
 	private Coordinate currentCoord;

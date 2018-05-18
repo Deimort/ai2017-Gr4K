@@ -6,6 +6,11 @@ import java.util.Set;
 import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 
+/**
+ * ImplÃ©mente une partie avec son plateau de jeu. Permet de gÃ©rer le tour des joueurs ainsi que le score et 
+ * la fin de la partie.
+ */
+
 public class Game {
 	
 	private Player[] players;
@@ -33,7 +38,7 @@ public class Game {
 	 * Ce constucteur permet d'initialiser une partie
 	 * @param player1 le joueur 1
 	 * @param player2 le joueur 2
-	 * @param board le plateau de départ
+	 * @param board le plateau de dï¿½part
 	 */
 	public Game(Player player1,Player player2,int[][] board) {
 		players = new Player[] {player1,player2};
@@ -45,9 +50,9 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet de donner une coordonée au joueur courant 
-	 * @param coord la coordonnée donnée
-	 * @return 1 si la coordonée est valide, 0 si elle ne l'est pas et -1 s'il n'y a pas de coordonnée possible
+	 * Cette mï¿½thode permet de donner une coordonï¿½e au joueur courant 
+	 * @param coord la coordonnï¿½e donnï¿½e
+	 * @return 1 si la coordonï¿½e est valide, 0 si elle ne l'est pas et -1 s'il n'y a pas de coordonnï¿½e possible
 	 */
 	public int giveCoord(Coordinate coord) {
 		return currentPlayer.setCurrentCoord(coord,currentBoard,checkStarvation());
@@ -62,7 +67,7 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet de jouer un coup
+	 * Cette mï¿½thode permet de jouer un coup
 	 */
 	public void play() {
 		isCycling = !previousBoards.add(currentBoard);
@@ -81,7 +86,7 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet de déterminer s'il y a un cycle
+	 * Cette mï¿½thode permet de dï¿½terminer s'il y a un cycle
 	 * @return true si c'est le cas, false sinon
 	 */
 	public boolean isCycling() {
@@ -89,7 +94,7 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet d'obtenir le plateau actuel
+	 * Cette mï¿½thode permet d'obtenir le plateau actuel
 	 * @return le plateau actuel
 	 */
 	public AwaleBoard getCurrentBoard() {
@@ -97,7 +102,7 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet	d'obtenir l'id du joueur courant
+	 * Cette mï¿½thode permet	d'obtenir l'id du joueur courant
 	 * @return id du joueur courant
 	 */
 	public int getCurrentPlayerID() {
@@ -105,7 +110,7 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet d'obtenir le score des deux joueurs
+	 * Cette mï¿½thode permet d'obtenir le score des deux joueurs
 	 * @return un tableau contenant les scores des deux joueurs
 	 */
 	public int[] getScores() {
@@ -118,13 +123,13 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet de déterminer le vainqueurde la partie
-	 * @return Joueur 1 si son score est plus élevé que celui du J2
-	 * Joueur2 si son score est plus élevé que celui du J1
-	 * Egalité autrement
+	 * Cette mï¿½thode permet de dï¿½terminer le vainqueurde la partie
+	 * @return Joueur 1 si son score est plus ï¿½levï¿½ que celui du J2
+	 * Joueur2 si son score est plus ï¿½levï¿½ que celui du J1
+	 * Egalitï¿½ autrement
 	 */
 	public String end() {
-		String winner = "Egalité";
+		String winner = "Egalitï¿½";
 		setPlayerScore();
 		
 		if(players[0].getScore() > players[1].getScore()) {
@@ -137,7 +142,7 @@ public class Game {
 	}
 
 	/**
-	 * Cette méthode permet de définir les scores de joueurs à la fin d'une partie
+	 * Cette mï¿½thode permet de dï¿½finir les scores de joueurs ï¿½ la fin d'une partie
 	 */
 	private void setPlayerScore() {
 		for(int i = 0;i < 6;i++) {
@@ -147,7 +152,7 @@ public class Game {
 	}
 	
 	/**
-	 * Cette méthode permet de déterminer si le joueur courant est en famine
+	 * Cette mï¿½thode permet de dï¿½terminer si le joueur courant est en famine
 	 * @return true s'il l'est, false sinon
 	 */
 	public boolean starvationSelf() {

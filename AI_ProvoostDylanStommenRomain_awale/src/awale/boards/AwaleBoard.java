@@ -2,11 +2,20 @@ package awale.boards;
 
 import java.util.Arrays;
 
+/**
+ * Représente un plateau de jeu d'awale, permet aussi de jouer un coup complet à une coordonnée donnée.
+ * Collabore avec Coordinate.
+ *
+ */
+
 public class AwaleBoard {
 	
 	private final int[][] board;
 	private final int eatenSeeds;
 	
+	/**
+	 * Initialise un nouveau plateau avec 4 graines dans chaque trou
+	 */
 	public AwaleBoard() {
 		board = new int[2][6];
 		for(int i = 0;i < board.length;i++) {
@@ -15,11 +24,22 @@ public class AwaleBoard {
 		this.eatenSeeds = 0;
 	}
 	
+	/**
+	 * Initalise un nouveau plateau selon un tableau et un nombre de graines mangées en paramètre
+	 * @param board
+	 * @param eatenSeeds
+	 */
 	public AwaleBoard(int[][] board,int eatenSeeds) {
 		this.board = board;
 		this.eatenSeeds = eatenSeeds;
 	}
 	
+	
+	/**
+	 * 
+	 * @param coord
+	 * @return
+	 */
 	private Coordinate sow(Coordinate coord) {
 		int nbSeed = board[coord.getX()][coord.getY()];
 		Coordinate newCoord = new Coordinate(coord);
@@ -76,6 +96,11 @@ public class AwaleBoard {
 		return seedCount;
 	}
 
+	/**
+	 * Vérifie si il y a une situation de famine à la ligne demandée en argument
+	 * @param row ligne que l'on souhaite vérifier
+	 * @return true si tous les trous sont à 0, false sinon
+	 */
 	public boolean checkStarvation(int row) {
 		for(int a : board[row]) {
 			if(a != 0) {
@@ -110,10 +135,20 @@ public class AwaleBoard {
 		}
 	}
 	
+	
+	/**
+	 * Retourne le nombre de graines mangées ce tour-ci
+	 * @return le nombre de graines mangées ce tour-ci
+	 */
 	public int getEatenSeeds() {
 		return eatenSeeds;
 	}
 	
+	/**
+	 * Permet de jouer un tour à la coordonnée donnée en appelant les méthodes eat et sow
+	 * @param coord coordonnée à laquelle on souhaite jouer
+	 * @return la nouvelle AwaleBoard
+	 */
 	public AwaleBoard play(Coordinate coord) {
 		AwaleBoard copy = new AwaleBoard(this.board(),this.getEatenSeeds());
 		Coordinate eatCoord = copy.sow(coord);
@@ -125,6 +160,10 @@ public class AwaleBoard {
 		return new AwaleBoard(copy.board(),eatenSeeds);
 	}
 
+	/**
+	 * Retourne une copie du tableau à deux dimensions représentant le plateau
+	 * @return une copie du tableau à deux dimensions
+	 */
 	public int[][] board(){
 		int[][] boardCopy = new int[2][];
 		for(int i = 0;i < board.length;i++) {
@@ -144,6 +183,12 @@ public class AwaleBoard {
 		return true;
 	}
 	
+	/**
+	 * Retourne le nombre de graines dans la case souhaitée
+	 * @param i le numéro de la ligne souhaitée
+	 * @param j le numéro de la colonne souhaitée
+	 * @return retourne le nombre de graines dans le trou
+	 */
 	public int getSeeds(int i,int j) {
 		return board[i][j];
 	}

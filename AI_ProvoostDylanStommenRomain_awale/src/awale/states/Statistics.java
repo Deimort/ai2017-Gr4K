@@ -1,5 +1,9 @@
 package awale.states;
 
+
+/**
+ * Permet de stocker et calculer les statistiques de la partie terminÃ©e et des parties prÃ©cÃ©dentes.
+ */
 public class Statistics {
 	
 	private int currentGameTime;
@@ -24,7 +28,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * Cette méthode permet d'obtenir les valeurs des différents attributs à la fin d'une partie
+	 * Cette mï¿½thode permet d'obtenir les valeurs des diffï¿½rents attributs ï¿½ la fin d'une partie
 	 * @param currentGameTime le temps de jeu actuel
 	 * @param scores les scores des deux joueurs
 	 */
@@ -69,7 +73,7 @@ public class Statistics {
 	}
 
 	/**
-	 * Cette méthode permet d'obtenir le temps de jeu actuel
+	 * Cette mï¿½thode permet d'obtenir le temps de jeu actuel
 	 * @return le temps de jeu
 	 */
 	public String getCurrentGameTime() {
@@ -77,7 +81,7 @@ public class Statistics {
 	}
 
 	/**
-	 * Cette méthode permet d'obtenir le temps de jeu minimum lors de cette utilisation
+	 * Cette mï¿½thode permet d'obtenir le temps de jeu minimum lors de cette utilisation
 	 * de l'application
 	 * @return le temps de jeu minimum
 	 */
@@ -86,7 +90,7 @@ public class Statistics {
 	}
 
 	/**
-	  * Cette méthode permet d'obtenir le temps de jeu maximum lors de cette utilisation
+	  * Cette mï¿½thode permet d'obtenir le temps de jeu maximum lors de cette utilisation
 	 * de l'application
 	 * @return
 	 */
@@ -95,7 +99,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * Cette méthode permet d'obtenir le score pour un joueur donné
+	 * Cette mï¿½thode permet d'obtenir le score pour un joueur donnï¿½
 	 * @param id l'id du joueur dont on souhaite obtenir le score
 	 * @return le score du joueur
 	 */
@@ -104,7 +108,7 @@ public class Statistics {
 	}
 
 	/**
-	 * Cette méthode permet d'obtenir l'id du joueur gagnant
+	 * Cette mï¿½thode permet d'obtenir l'id du joueur gagnant
 	 * @return l'id du joueur gagnant
 	 */
 	public int getWinnerId() {
@@ -112,24 +116,24 @@ public class Statistics {
 	}
 
 	/**
-	 * Cette méthode permet d'obtenir le nombre de parties jouées lors de cette execution de l'application
-	 * @return le nombre de parties jouées lors de cette execution de l'application
+	 * Cette mï¿½thode permet d'obtenir le nombre de parties jouï¿½es lors de cette execution de l'application
+	 * @return le nombre de parties jouï¿½es lors de cette execution de l'application
 	 */
 	public int getGameCount() {
 		return gameCount;
 	}
 
 	/**
-	 * Cette méthode permet d'obtenir le nombre de parties gagnées lors de cette execution de l'application
-	 * pour un joueur donné
-	 * @return le nombre de parties gagnées lors de cette execution de l'application
+	 * Cette mï¿½thode permet d'obtenir le nombre de parties gagnï¿½es lors de cette execution de l'application
+	 * pour un joueur donnï¿½
+	 * @return le nombre de parties gagnï¿½es lors de cette execution de l'application
 	 */
 	public int getVictories(int id) {
 		return victories[id];
 	}
 	
 	/**
-	 * Cette méthode permet d'obtenir le temps moyen d'une partie lors de cette execution de l'application
+	 * Cette mï¿½thode permet d'obtenir le temps moyen d'une partie lors de cette execution de l'application
 	 * @return le temps moyen d'une partie lors de cette execution de l'application
 	 */
 	public String getAverageTime() {

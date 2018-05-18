@@ -3,6 +3,11 @@ package awale.domains;
 import awale.boards.AwaleBoard;
 import awale.boards.Coordinate;
 
+/**
+ * Permet à un joueur humain d'intéragir avec le jeu. Enregistre la coordonnée souhaitée et l'évalue.
+ *
+ */
+
 public class HumanPlayer extends Player {
 	private Coordinate currentCoord;
 	
