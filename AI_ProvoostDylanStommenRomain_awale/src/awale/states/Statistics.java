@@ -39,8 +39,14 @@ public class Statistics {
 		setMaxTime(currentGameTime);
 		this.winnerId = getWinner(scores);
 		this.scores = scores;
+		manageGameCounts();
+	}
+
+	private void manageGameCounts() {
 		gameCount++;
-		victories[winnerId]++;
+		if(winnerId != -1) {
+			victories[winnerId]++;
+		}
 	}
 
 	private int getWinner(int[] scores) {
